@@ -1,3 +1,4 @@
+import hashlib
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -5,6 +6,7 @@ from fastapi.responses import JSONResponse
 
 from app import db, log, wakeup
 from app.auth import Caller, get_caller
+from app.prompt_screen import screen_prompt
 from app.schemas import MediaAccepted, MediaIn, MediaOut
 
 router = APIRouter()
@@ -19,6 +21,14 @@ def parse_media_id(media_id: str) -> uuid.UUID:
 
 @router.post("/media", status_code=202, response_model=MediaAccepted)
 async def create_media(body: MediaIn, caller: Caller = Depends(get_caller)):
+    if body.source == "generation":
+        # Refuse before anything is generated, stored or scored. Log a hash, never the prompt.
+        verdict = screen_prompt(body.prompt or "")
+        if not verdict.allowed:
+            log.warning("prompt_refused", workspace_id=caller.workspace_id, user_id=caller.user_id,
+                        prompt_sha256=hashlib.sha256((body.prompt or "").encode()).hexdigest(),
+                        reason_codes=verdict.reasons)
+            return JSONResponse(status_code=422, content={"reasons": verdict.reasons})
     async with db.pool().acquire() as conn, conn.transaction():
         media_id = await conn.fetchval(
             "INSERT INTO media (workspace_id, user_id, type, source, prompt, frames) "

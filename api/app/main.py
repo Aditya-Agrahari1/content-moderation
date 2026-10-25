@@ -34,6 +34,14 @@ app.include_router(callback.router)
 
 
 @app.middleware("http")
+async def body_limit(request: Request, call_next):
+    length = request.headers.get("content-length")
+    if length is not None and length.isdigit() and int(length) > settings.max_body_bytes:
+        return JSONResponse(status_code=413, content={"reasons": ["request body too large"]})
+    return await call_next(request)
+
+
+@app.middleware("http")
 async def request_id(request: Request, call_next):
     token = log.request_id_var.set(request.headers.get("X-Request-Id") or uuid.uuid4().hex)
     try:

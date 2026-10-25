@@ -10,7 +10,13 @@
 
 ## How work was checked
 
-<!-- Filled in as phases complete. -->
+- **Nothing was accepted because it looked right.** Every behaviour claimed in the README was run, and its real output is saved in `evidence/`.
+- **Baseline first.** The five incident tests were written against the naive system and *seen to fail* for the stated reason before any fix (at the `broken-baseline` tag). The final test files were re-run against the baseline code, too.
+- **Fix by fix.** Each fix commit was followed by the incident tests. The full suite (171 backend + 8 frontend) was run on a fresh database for the after-evidence.
+- **Independent oracle.** Policy correctness is cross-checked against `tests/helpers/policy_oracle.py`, which shares no code with `app/policy.py`, with Hypothesis (300 derandomized cases). The audit uses the same oracle on the original input frames.
+- **Real failures, not mocks, wherever possible.** Real PostgreSQL triggers, a real Redis, a real `SIGKILL` of the worker containers, the real provider in timeout and error modes. Only 429/409/malformed responses are mocked, because the provider's four required modes can't produce them.
+- **Traces read by eye.** Worker logs were read for one media item through an outage (`evidence/after/sample_trace.log`), to confirm the sequence: retry → open circuit → budget exhausted → probe → canary success.
+- **External facts.** Pricing was taken from the official AWS Rekognition and Google Vision pricing pages, accessed 2026-10-26. Azure's page didn't show a number, so none is quoted. The self-hosted GPU cost is marked illustrative.
 
 ## Incorrect or flawed suggestions caught
 
@@ -30,4 +36,11 @@ Each entry records what happened, who caught it, and how.
 
 ## Not verified
 
-<!-- Filled in at the end. -->
+- **Real vendors:** whether any real moderation vendor honours idempotency keys, or bills replays. Only the fake provider demonstrates the pattern.
+- **Real crashes beyond a killed process:** machine or power loss, a PostgreSQL crash or fsync behaviour, network partitions, clock skew.
+- **Redis down under load:** the breaker's in-memory fallback is unit-tested, but Redis was never stopped during a workload.
+- **End-to-end 429 / 409 / malformed handling:** tested with a mocked HTTP transport only.
+- **CI:** the GitHub Actions workflow has never run (no remote).
+- **Scale:** throughput or behaviour beyond one laptop; every timing in the README is from Docker Desktop with test timeouts.
+- **Prompt screening quality** beyond the listed test prompts. It is a deterministic first layer and will miss euphemisms and paraphrases.
+- **Part 3 cost figures** are list prices, not quotes. Hive, PhotoDNA, Thorn Safer and GPU pricing were not verified.

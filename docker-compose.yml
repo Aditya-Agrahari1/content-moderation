@@ -1,0 +1,91 @@
+name: content-moderation
+
+x-app-env: &app-env
+  DATABASE_URL: postgresql://app:app@db:5432/moderation
+  REDIS_URL: redis://redis:6379/0
+  PROVIDER_URL: http://provider:8001
+  CALLBACK_URL: http://api:8000/provider/callback
+  PROVIDER_CALLBACK_SECRET: ${PROVIDER_CALLBACK_SECRET:-local-dev-placeholder-not-secret}
+
+x-py-healthcheck: &py-healthcheck
+  interval: 3s
+  timeout: 3s
+  retries: 20
+  start_period: 5s
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: moderation
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d moderation"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  provider:
+    build: ./provider
+    ports:
+      - "8001:8001"
+    environment:
+      PROVIDER_CALLBACK_SECRET: ${PROVIDER_CALLBACK_SECRET:-local-dev-placeholder-not-secret}
+      ASYNC_FRAME_THRESHOLD: ${ASYNC_FRAME_THRESHOLD:-30}
+      PROVIDER_HANG_S: ${PROVIDER_HANG_S:-60}
+      CALLBACK_DELAY_MS: ${CALLBACK_DELAY_MS:-500}
+      CALLBACK_MAX_ATTEMPTS: ${CALLBACK_MAX_ATTEMPTS:-5}
+    healthcheck:
+      <<: *py-healthcheck
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/healthz')"]
+
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      <<: *app-env
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+      provider: { condition: service_healthy }
+    healthcheck:
+      <<: *py-healthcheck
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/readyz')"]
+
+  worker:
+    build: ./api
+    command: ["python", "-m", "app.worker"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      <<: *app-env
+    deploy:
+      replicas: 2
+    depends_on:
+      api: { condition: service_healthy }   # api runs migrations and the seed first
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      api: { condition: service_healthy }
+
+volumes:
+  pgdata:

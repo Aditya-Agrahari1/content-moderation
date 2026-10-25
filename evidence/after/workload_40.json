@@ -1,0 +1,3513 @@
+{
+  "params": {
+    "out": "evidence/after/workload_40.json",
+    "burst": 200,
+    "video_frames": 40,
+    "image_interval": 1.0,
+    "normal_s": 20,
+    "outage_s": 60,
+    "recovery_max_s": 180,
+    "outage_mode": "timeout",
+    "seed": 42
+  },
+  "uploads_accepted": 555,
+  "published_unchecked": 0,
+  "audit": {
+    "published_total": 487,
+    "published_unchecked": 0,
+    "check_a_published_without_provider_score": 0,
+    "check_b_published_against_policy": 0,
+    "check_c_published_without_covering_result": 0,
+    "examples": {
+      "a": [],
+      "b": [],
+      "c": []
+    }
+  },
+  "provider_calls_total": 567,
+  "provider_calls_per_upload": 1.022,
+  "provider_scored_per_upload": 1.0,
+  "max_calls_for_one_media": 4,
+  "media_scored_more_than_once": 0,
+  "prohibited_prompts_accepted": 0,
+  "safe_prompts_refused": 0,
+  "final_decision_differs_from_oracle": 0,
+  "oldest_unresolved_job_age_max_s": {
+    "normal": {
+      "ws_verified": 0.9,
+      "ws_unverified": 0.0
+    },
+    "outage": {
+      "ws_verified": 61.0,
+      "ws_unverified": 59.9
+    },
+    "recovery": {
+      "ws_unverified": 68.0,
+      "ws_verified": 70.7
+    }
+  },
+  "backlog_drained_s_after_recovery": 11.1,
+  "final_status_counts": {
+    "ws_unverified": {
+      "published": 122,
+      "blocked": 33
+    },
+    "ws_verified": {
+      "published": 365,
+      "blocked": 20,
+      "held:needs_human_review": 15
+    }
+  },
+  "latency_by_workspace_phase": {
+    "ws_verified/normal": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 1.21,
+        "p95": 1.92,
+        "max": 2.04
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 1.21,
+        "p95": 1.92,
+        "max": 2.04
+      }
+    },
+    "ws_unverified/normal": {
+      "count": 23,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 23,
+        "p50": 0.12,
+        "p95": 1.06,
+        "max": 1.18
+      },
+      "time_to_decision_s": {
+        "n": 23,
+        "p50": 0.12,
+        "p95": 1.06,
+        "max": 1.18
+      }
+    },
+    "ws_verified/outage": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 9.58,
+        "p95": 10.73,
+        "max": 10.8
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 70.83,
+        "p95": 71.62,
+        "max": 71.68
+      }
+    },
+    "ws_unverified/outage": {
+      "count": 70,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 70,
+        "p50": 0.98,
+        "p95": 3.45,
+        "max": 4.09
+      },
+      "time_to_decision_s": {
+        "n": 70,
+        "p50": 45.2,
+        "p95": 68.53,
+        "max": 69.02
+      }
+    },
+    "ws_unverified/recovery": {
+      "count": 62,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 62,
+        "p50": 1.02,
+        "p95": 1.04,
+        "max": 3.03
+      },
+      "time_to_decision_s": {
+        "n": 62,
+        "p50": 1.03,
+        "p95": 7.07,
+        "max": 9.1
+      }
+    }
+  },
+  "timeline": [
+    {
+      "t": 0.31,
+      "phase": "normal",
+      "jobs": {},
+      "media": {}
+    },
+    {
+      "t": 1.75,
+      "phase": "normal",
+      "jobs": {
+        "ws_verified": {
+          "oldest_s": 0.9,
+          "unresolved": 50
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 1
+        },
+        "ws_verified": {
+          "blocked": 3,
+          "published": 28,
+          "pending": 25,
+          "held:needs_human_review": 1
+        }
+      }
+    },
+    {
+      "t": 2.81,
+      "phase": "normal",
+      "jobs": {
+        "ws_verified": {
+          "oldest_s": 0.8,
+          "unresolved": 51
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 1,
+          "blocked": 1
+        },
+        "ws_verified": {
+          "blocked": 6,
+          "published": 81,
+          "held:needs_human_review": 3,
+          "pending": 50
+        }
+      }
+    },
+    {
+      "t": 3.83,
+      "phase": "normal",
+      "jobs": {
+        "ws_verified": {
+          "oldest_s": 0.4,
+          "unresolved": 34
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 2,
+          "blocked": 1
+        },
+        "ws_verified": {
+          "blocked": 9,
+          "published": 137,
+          "held:needs_human_review": 5,
+          "pending": 30
+        }
+      }
+    },
+    {
+      "t": 4.84,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 3,
+          "blocked": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 5.85,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 4,
+          "blocked": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 6.86,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 5,
+          "blocked": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 7.87,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 5,
+          "blocked": 2
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 8.87,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 6,
+          "blocked": 2
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 9.88,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 6,
+          "blocked": 3
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 10.89,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 6,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 11.9,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 7,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 12.9,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 8,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 13.91,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 9,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 14.92,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 10,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 15.93,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 11,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 16.93,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 12,
+          "blocked": 4
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 17.94,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 12,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 18.95,
+      "phase": "normal",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 12,
+          "blocked": 5,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 19.97,
+      "phase": "normal",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 13,
+          "blocked": 5,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 20.98,
+      "phase": "normal",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 14,
+          "blocked": 5,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 21.99,
+      "phase": "normal",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 15,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 22.99,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 16,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 24.0,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 25.07,
+      "phase": "outage",
+      "jobs": {
+        "ws_verified": {
+          "oldest_s": 0.9,
+          "unresolved": 126
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "pending": 125,
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 26.09,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.9,
+          "unresolved": 11
+        },
+        "ws_verified": {
+          "oldest_s": 2.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "pending": 11
+        },
+        "ws_verified": {
+          "pending": 200,
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 27.11,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 1.9,
+          "unresolved": 12
+        },
+        "ws_verified": {
+          "oldest_s": 3.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "pending": 12
+        },
+        "ws_verified": {
+          "pending": 200,
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 28.12,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 2.9,
+          "unresolved": 13
+        },
+        "ws_verified": {
+          "oldest_s": 4.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "pending": 13
+        },
+        "ws_verified": {
+          "pending": 198,
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "held:provider_unavailable": 2
+        }
+      }
+    },
+    {
+      "t": 29.14,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 3.9,
+          "unresolved": 14
+        },
+        "ws_verified": {
+          "oldest_s": 5.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 14
+        },
+        "ws_verified": {
+          "pending": 198,
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "held:provider_unavailable": 2
+        }
+      }
+    },
+    {
+      "t": 30.15,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 5.0,
+          "unresolved": 15
+        },
+        "ws_verified": {
+          "oldest_s": 6.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 15
+        },
+        "ws_verified": {
+          "pending": 198,
+          "blocked": 12,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "held:provider_unavailable": 2
+        }
+      }
+    },
+    {
+      "t": 31.17,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 6.0,
+          "unresolved": 16
+        },
+        "ws_verified": {
+          "oldest_s": 7.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 16
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 25,
+          "published": 180,
+          "pending": 175,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 32.19,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 7.0,
+          "unresolved": 17
+        },
+        "ws_verified": {
+          "oldest_s": 8.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 17
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 58,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "pending": 142
+        }
+      }
+    },
+    {
+      "t": 33.21,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 8.0,
+          "unresolved": 18
+        },
+        "ws_verified": {
+          "oldest_s": 9.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 18
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 77,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "pending": 123
+        }
+      }
+    },
+    {
+      "t": 34.24,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 9.0,
+          "unresolved": 19
+        },
+        "ws_verified": {
+          "oldest_s": 10.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 19
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 106,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "pending": 94
+        }
+      }
+    },
+    {
+      "t": 35.25,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 10.1,
+          "unresolved": 20
+        },
+        "ws_verified": {
+          "oldest_s": 11.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 20
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 167,
+          "published": 180,
+          "held:needs_human_review": 8,
+          "pending": 33
+        }
+      }
+    },
+    {
+      "t": 36.27,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 11.1,
+          "unresolved": 21
+        },
+        "ws_verified": {
+          "oldest_s": 12.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 21
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 37.28,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 12.1,
+          "unresolved": 22
+        },
+        "ws_verified": {
+          "oldest_s": 13.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 22
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 38.3,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 13.1,
+          "unresolved": 23
+        },
+        "ws_verified": {
+          "oldest_s": 14.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 23
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 39.31,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 14.1,
+          "unresolved": 24
+        },
+        "ws_verified": {
+          "oldest_s": 15.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 24
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 40.33,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 15.1,
+          "unresolved": 25
+        },
+        "ws_verified": {
+          "oldest_s": 16.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 25
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 41.36,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 16.2,
+          "unresolved": 26
+        },
+        "ws_verified": {
+          "oldest_s": 17.2,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 26
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 42.37,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 17.2,
+          "unresolved": 27
+        },
+        "ws_verified": {
+          "oldest_s": 18.3,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 27
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 43.39,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 18.2,
+          "unresolved": 28
+        },
+        "ws_verified": {
+          "oldest_s": 19.3,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 28
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 44.41,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 19.2,
+          "unresolved": 29
+        },
+        "ws_verified": {
+          "oldest_s": 20.3,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 29
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 45.42,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 20.2,
+          "unresolved": 30
+        },
+        "ws_verified": {
+          "oldest_s": 21.3,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 30
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 46.43,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 21.2,
+          "unresolved": 31
+        },
+        "ws_verified": {
+          "oldest_s": 22.3,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 31
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 47.45,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 22.3,
+          "unresolved": 32
+        },
+        "ws_verified": {
+          "oldest_s": 23.3,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 32
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 48.46,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 23.3,
+          "unresolved": 33
+        },
+        "ws_verified": {
+          "oldest_s": 24.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 33
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 49.47,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 24.3,
+          "unresolved": 34
+        },
+        "ws_verified": {
+          "oldest_s": 25.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 33,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 50.49,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 25.3,
+          "unresolved": 35
+        },
+        "ws_verified": {
+          "oldest_s": 26.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 35
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 51.5,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 26.3,
+          "unresolved": 36
+        },
+        "ws_verified": {
+          "oldest_s": 27.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 35,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 52.52,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 27.3,
+          "unresolved": 37
+        },
+        "ws_verified": {
+          "oldest_s": 28.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 37
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 53.54,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 28.3,
+          "unresolved": 38
+        },
+        "ws_verified": {
+          "oldest_s": 29.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 38
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 54.55,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 29.4,
+          "unresolved": 39
+        },
+        "ws_verified": {
+          "oldest_s": 30.4,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 39
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 55.56,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 30.4,
+          "unresolved": 40
+        },
+        "ws_verified": {
+          "oldest_s": 31.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 40
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 56.58,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 31.4,
+          "unresolved": 41
+        },
+        "ws_verified": {
+          "oldest_s": 32.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 41
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 57.6,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 32.4,
+          "unresolved": 42
+        },
+        "ws_verified": {
+          "oldest_s": 33.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 42
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 58.61,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 33.4,
+          "unresolved": 43
+        },
+        "ws_verified": {
+          "oldest_s": 34.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 43
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 59.62,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 34.4,
+          "unresolved": 44
+        },
+        "ws_verified": {
+          "oldest_s": 35.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 44
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 60.64,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 35.4,
+          "unresolved": 45
+        },
+        "ws_verified": {
+          "oldest_s": 36.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 44,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 61.67,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 36.5,
+          "unresolved": 46
+        },
+        "ws_verified": {
+          "oldest_s": 37.6,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 44,
+          "pending": 2
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 62.69,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 37.5,
+          "unresolved": 47
+        },
+        "ws_verified": {
+          "oldest_s": 38.6,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 45,
+          "pending": 2
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 63.71,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 38.5,
+          "unresolved": 48
+        },
+        "ws_verified": {
+          "oldest_s": 39.6,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 48
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 64.73,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 39.5,
+          "unresolved": 49
+        },
+        "ws_verified": {
+          "oldest_s": 40.6,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 49
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 65.74,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 40.6,
+          "unresolved": 50
+        },
+        "ws_verified": {
+          "oldest_s": 41.6,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 50
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 66.76,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 41.6,
+          "unresolved": 51
+        },
+        "ws_verified": {
+          "oldest_s": 42.7,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 51
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 67.78,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 42.6,
+          "unresolved": 52
+        },
+        "ws_verified": {
+          "oldest_s": 43.7,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 52
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 68.8,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 43.6,
+          "unresolved": 53
+        },
+        "ws_verified": {
+          "oldest_s": 44.7,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 53
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 69.81,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 44.6,
+          "unresolved": 54
+        },
+        "ws_verified": {
+          "oldest_s": 45.7,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 54
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 70.83,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 45.6,
+          "unresolved": 55
+        },
+        "ws_verified": {
+          "oldest_s": 46.7,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 55
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 71.85,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 46.7,
+          "unresolved": 56
+        },
+        "ws_verified": {
+          "oldest_s": 47.7,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 55,
+          "pending": 1
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 72.87,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 47.7,
+          "unresolved": 57
+        },
+        "ws_verified": {
+          "oldest_s": 48.8,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 55,
+          "pending": 2
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 73.93,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 48.7,
+          "unresolved": 58
+        },
+        "ws_verified": {
+          "oldest_s": 49.8,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 55,
+          "pending": 3
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 74.95,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 49.8,
+          "unresolved": 59
+        },
+        "ws_verified": {
+          "oldest_s": 50.8,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 59
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 75.97,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 50.8,
+          "unresolved": 60
+        },
+        "ws_verified": {
+          "oldest_s": 51.9,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 60
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 76.99,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 51.8,
+          "unresolved": 61
+        },
+        "ws_verified": {
+          "oldest_s": 52.9,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 61
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 78.0,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 52.8,
+          "unresolved": 62
+        },
+        "ws_verified": {
+          "oldest_s": 53.9,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 62
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 79.02,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 53.8,
+          "unresolved": 63
+        },
+        "ws_verified": {
+          "oldest_s": 54.9,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 63
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 80.04,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 54.8,
+          "unresolved": 64
+        },
+        "ws_verified": {
+          "oldest_s": 55.9,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 64
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 81.06,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 55.9,
+          "unresolved": 65
+        },
+        "ws_verified": {
+          "oldest_s": 56.9,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 65
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 82.07,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 56.9,
+          "unresolved": 66
+        },
+        "ws_verified": {
+          "oldest_s": 58.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 66
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 83.09,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 57.9,
+          "unresolved": 67
+        },
+        "ws_verified": {
+          "oldest_s": 59.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "pending": 1,
+          "held:provider_unavailable": 66
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 84.1,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 58.9,
+          "unresolved": 68
+        },
+        "ws_verified": {
+          "oldest_s": 60.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 68
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 85.11,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 59.9,
+          "unresolved": 69
+        },
+        "ws_verified": {
+          "oldest_s": 61.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 69
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 86.13,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 60.9,
+          "unresolved": 70
+        },
+        "ws_verified": {
+          "oldest_s": 62.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 70
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 87.14,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 62.0,
+          "unresolved": 71
+        },
+        "ws_verified": {
+          "oldest_s": 63.0,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 71
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 88.15,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 63.0,
+          "unresolved": 72
+        },
+        "ws_verified": {
+          "oldest_s": 64.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 72
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 89.16,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 64.0,
+          "unresolved": 73
+        },
+        "ws_verified": {
+          "oldest_s": 65.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 73
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 90.18,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 65.0,
+          "unresolved": 74
+        },
+        "ws_verified": {
+          "oldest_s": 66.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 74
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 91.19,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 66.0,
+          "unresolved": 75
+        },
+        "ws_verified": {
+          "oldest_s": 67.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 75
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 92.2,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 67.0,
+          "unresolved": 76
+        },
+        "ws_verified": {
+          "oldest_s": 68.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 76
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 93.21,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 68.0,
+          "unresolved": 77
+        },
+        "ws_verified": {
+          "oldest_s": 69.1,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "blocked": 5,
+          "held:provider_unavailable": 77
+        },
+        "ws_verified": {
+          "blocked": 12,
+          "held:provider_unavailable": 200,
+          "published": 180,
+          "held:needs_human_review": 8
+        }
+      }
+    },
+    {
+      "t": 94.23,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 49.7,
+          "unresolved": 49
+        },
+        "ws_verified": {
+          "oldest_s": 70.1,
+          "unresolved": 160
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 38,
+          "blocked": 14,
+          "held:provider_unavailable": 48,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 216,
+          "blocked": 14,
+          "held:needs_human_review": 10,
+          "held:provider_unavailable": 160
+        }
+      }
+    },
+    {
+      "t": 95.25,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 6.1,
+          "unresolved": 6
+        },
+        "ws_verified": {
+          "oldest_s": 70.6,
+          "unresolved": 114
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 77,
+          "blocked": 19,
+          "held:provider_unavailable": 4,
+          "pending": 2
+        },
+        "ws_verified": {
+          "published": 260,
+          "blocked": 16,
+          "held:needs_human_review": 11,
+          "held:provider_unavailable": 113
+        }
+      }
+    },
+    {
+      "t": 96.26,
+      "phase": "recovery",
+      "jobs": {
+        "ws_verified": {
+          "oldest_s": 70.7,
+          "unresolved": 16
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 83,
+          "blocked": 20
+        },
+        "ws_verified": {
+          "published": 350,
+          "blocked": 20,
+          "held:needs_human_review": 14,
+          "held:provider_unavailable": 16
+        }
+      }
+    },
+    {
+      "t": 97.27,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 84,
+          "blocked": 20
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 98.29,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 84,
+          "blocked": 21
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 99.3,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 85,
+          "blocked": 21
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 100.32,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 86,
+          "blocked": 21
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 101.33,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 87,
+          "blocked": 21
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 102.34,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 87,
+          "blocked": 22
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 103.35,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 88,
+          "blocked": 22
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 104.37,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 89,
+          "blocked": 22
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 105.38,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 90,
+          "blocked": 22
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 106.4,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 90,
+          "blocked": 23
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 107.41,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 91,
+          "blocked": 23
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 108.42,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 91,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 109.44,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 91,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 110.45,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 92,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 111.46,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 93,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 112.48,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 94,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 113.49,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 95,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 114.51,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 96,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 115.53,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 97,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 116.54,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 98,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 117.56,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 99,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 118.58,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 100,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 119.59,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 101,
+          "blocked": 25,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 120.61,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 101,
+          "blocked": 26
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 121.62,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 102,
+          "blocked": 26
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 122.64,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 103,
+          "blocked": 26
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 123.66,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 103,
+          "blocked": 27
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 124.67,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 104,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 125.68,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 105,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 126.7,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 106,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 127.71,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 107,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 128.73,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 108,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 129.74,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 109,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 130.75,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 110,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 131.77,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 111,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 132.78,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 112,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 133.81,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "pending": 1,
+          "published": 113,
+          "blocked": 27
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 134.83,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 114,
+          "blocked": 27,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 135.84,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 114,
+          "blocked": 28,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 136.85,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 115,
+          "blocked": 28,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 137.87,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 116,
+          "blocked": 28,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 138.88,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 116,
+          "blocked": 29,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 139.89,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 116,
+          "blocked": 30,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 140.91,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 117,
+          "blocked": 30,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 141.92,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 117,
+          "blocked": 31,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 142.93,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 118,
+          "blocked": 31,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 143.96,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 119,
+          "blocked": 31,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 144.97,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 119,
+          "blocked": 32,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 145.99,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 120,
+          "blocked": 32,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 147.0,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.0,
+          "unresolved": 1
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 121,
+          "blocked": 32,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 148.01,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 122,
+          "blocked": 33
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 149.03,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 122,
+          "blocked": 33
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 150.04,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 122,
+          "blocked": 33
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    },
+    {
+      "t": 151.05,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 122,
+          "blocked": 33
+        },
+        "ws_verified": {
+          "published": 365,
+          "blocked": 20,
+          "held:needs_human_review": 15
+        }
+      }
+    }
+  ]
+}

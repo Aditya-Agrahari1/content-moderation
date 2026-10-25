@@ -1,0 +1,12 @@
+{
+  "published_total": 923,
+  "published_unchecked": 0,
+  "check_a_published_without_provider_score": 0,
+  "check_b_published_against_policy": 0,
+  "check_c_published_without_covering_result": 0,
+  "examples": {
+    "a": [],
+    "b": [],
+    "c": []
+  }
+}

@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.7.0 -- /opt/venv/bin/python
+hypothesis profile 'default'
+rootdir: /app
+configfile: pyproject.toml
+plugins: anyio-4.15.1, hypothesis-6.170.9, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=session, asyncio_default_test_loop_scope=session
+collecting ... collected 4 items
+
+tests/incident/test_incidents.py::test_timeout_does_not_publish PASSED   [ 25%]
+tests/incident/test_incidents.py::test_late_frame_is_screened PASSED     [ 50%]
+tests/incident/test_incidents.py::test_prohibited_prompt_refused PASSED  [ 75%]
+tests/incident/test_incidents.py::test_redelivery_while_running PASSED   [100%]
+
+============================== 4 passed in 12.27s ==============================

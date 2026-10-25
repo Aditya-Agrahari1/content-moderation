@@ -1,0 +1,10 @@
+[00:40:45] uploaded 20-frame video 910ee32c-833b-48ac-ac12-498998e7feca; provider in slow mode (8 s)
+[00:40:46] provider has scored it (calls=1, scored=1); worker is waiting for the response
+[00:40:47] SIGKILL sent to every worker container
+[00:40:47] after the crash: status=pending, screening_results rows=0
+[00:40:48] job row: claimed|1|t
+[00:40:50] provider back to ok; workers restarted
+[00:40:52] recovered: status=published 5.2s after the crash
+[00:40:53] provider calls=2, provider scorings=1, screening_results rows=1
+[00:40:53] job_attempts: 1:never finished, 2:success
+[00:40:53] PASS

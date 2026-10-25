@@ -1,0 +1,134 @@
+[0.16] phase normal: burst of 200 x 20-frame videos
+[23.06] phase outage (timeout): burst of 200
+[85.09] phase recovery: waiting for every upload to be decided
+{
+  "uploads_accepted": 508,
+  "published_unchecked": 0,
+  "audit": {
+    "published_total": 436,
+    "published_unchecked": 0,
+    "check_a_published_without_provider_score": 0,
+    "check_b_published_against_policy": 0,
+    "check_c_published_without_covering_result": 0,
+    "examples": {
+      "a": [],
+      "b": [],
+      "c": []
+    }
+  },
+  "provider_calls_total": 520,
+  "provider_calls_per_upload": 1.024,
+  "provider_scored_per_upload": 1.0,
+  "max_calls_for_one_media": 3,
+  "media_scored_more_than_once": 0,
+  "prohibited_prompts_accepted": 0,
+  "safe_prompts_refused": 0,
+  "final_decision_differs_from_oracle": 0,
+  "oldest_unresolved_job_age_max_s": {
+    "normal": {
+      "ws_verified": 0.5
+    },
+    "outage": {
+      "ws_unverified": 61.1,
+      "ws_verified": 61.3
+    },
+    "recovery": {
+      "ws_unverified": 68.1,
+      "ws_verified": 70.7
+    }
+  },
+  "backlog_drained_s_after_recovery": 11.1,
+  "final_status_counts": {
+    "ws_unverified": {
+      "published": 78,
+      "blocked": 30
+    },
+    "ws_verified": {
+      "published": 358,
+      "held:needs_human_review": 28,
+      "blocked": 14
+    }
+  },
+  "latency_by_workspace_phase": {
+    "ws_verified/normal": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 0.89,
+        "p95": 1.44,
+        "max": 1.54
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 0.89,
+        "p95": 1.44,
+        "max": 1.54
+      }
+    },
+    "ws_unverified/normal": {
+      "count": 22,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 22,
+        "p50": 0.54,
+        "p95": 0.72,
+        "max": 0.89
+      },
+      "time_to_decision_s": {
+        "n": 22,
+        "p50": 0.54,
+        "p95": 0.72,
+        "max": 0.89
+      }
+    },
+    "ws_verified/outage": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 7.41,
+        "p95": 8.18,
+        "max": 8.27
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 70.29,
+        "p95": 71.1,
+        "max": 71.72
+      }
+    },
+    "ws_unverified/outage": {
+      "count": 71,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 71,
+        "p50": 0.93,
+        "p95": 3.03,
+        "max": 4.96
+      },
+      "time_to_decision_s": {
+        "n": 71,
+        "p50": 43.41,
+        "p95": 68.52,
+        "max": 69.13
+      }
+    },
+    "ws_unverified/recovery": {
+      "count": 15,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 15,
+        "p50": 0.67,
+        "p95": 1.65,
+        "max": 2.7
+      },
+      "time_to_decision_s": {
+        "n": 15,
+        "p50": 1.65,
+        "p95": 7.8,
+        "max": 7.8
+      }
+    }
+  }
+}

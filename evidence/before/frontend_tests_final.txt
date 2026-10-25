@@ -1,0 +1,274 @@
+﻿# Final frontend tests (src/ReviewQueue.test.tsx at main) run against broken-baseline UI code
+
+ RUN  v2.1.8 C:/Users/agrah/OneDrive/Desktop/cm_baseline/frontend
+
+ ❯ src/ReviewQueue.test.tsx (8 tests | 6 failed) 4195ms
+   × review queue states (incident bug 5) > an HTTP 500 is shown as a failure with Retry, never as 'Nothing to review' 1034ms
+     → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × review queue states (incident bug 5) > a network error is shown as a failure, never as 'Nothing to review' 1008ms
+     → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × review queue states (incident bug 5) > an unexpected response shape is a failure, not an empty queue 1009ms
+     → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × review queue states (incident bug 5) > Retry reloads after a failure 1016ms
+     → Unable to find role="button" and name `/retry/i`
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × review actions > lists held items; outage holds cannot be approved 38ms
+     → expect(element).toBeDisabled()
+
+Received element is not disabled:
+  <button />
+   × review actions > a failed approve shows the error and keeps the item 21ms
+     → expect(element).toHaveTextContent()
+
+Expected element to have text content:
+  /could not approve.*409.*not_held/i
+Received:
+  approve failed (HTTP 409)
+
+npx : ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+At line:1 char:649
++ ... code" | Out-File -Encoding utf8 $out; npx vitest run *>> $out; Get-Co ...
++                                           ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+ FAIL  src/ReviewQueue.test.tsx > review queue states (incident bug 5) > an HTTP 500 is shown as a failure with Retry, 
+never as 'Nothing to review'
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/ReviewQueue.test.tsx:27:25
+     25|     mockFetch(() => json(500, { detail: "Internal server error" }));
+     26|     render(<ReviewQueue identity={admin} />);
+     27|     expect(await screen.findByRole("alert")).toHaveTextContent(/could …
+       |                         ^
+     28|     expect(screen.getByRole("button", { name: /retry/i })).toBeInTheDo…
+     29|     expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/ReviewQueue.test.tsx > review queue states (incident bug 5) > a network error is shown as a failure, never 
+as 'Nothing to review'
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/ReviewQueue.test.tsx:35:25
+     33|     mockFetch(() => Promise.reject(new TypeError("Failed to fetch")));
+     34|     render(<ReviewQueue identity={admin} />);
+     35|     expect(await screen.findByRole("alert")).toHaveTextContent(/could …
+       |                         ^
+     36|     expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocu…
+     37|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/ReviewQueue.test.tsx > review queue states (incident bug 5) > an unexpected response shape is a failure, 
+not an empty queue
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/ReviewQueue.test.tsx:49:25
+     47|     mockFetch(() => json(200, { items: "?" }));
+     48|     render(<ReviewQueue identity={admin} />);
+     49|     expect(await screen.findByRole("alert")).toHaveTextContent(/unexpe…
+       |                         ^
+     50|     expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocu…
+     51|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/ReviewQueue.test.tsx > review queue states (incident bug 5) > Retry reloads after a failure
+TestingLibraryElementError: Unable to find role="button" and name `/retry/i`
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/ReviewQueue.test.tsx:57:34
+     55|     mockFetch(() => (++calls === 1 ? json(503, {}) : json(200, [])));
+     56|     render(<ReviewQueue identity={admin} />);
+     57|     fireEvent.click(await screen.findByRole("button", { name: /retry/i…
+       |                                  ^
+     58|     expect(await screen.findByText(/nothing to review/i)).toBeInTheDoc…
+     59|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 2 passed (8)
+   Start at  00:32:40
+   Duration  7.03s (transform 120ms, setup 500ms, collect 86ms, tests 4.20s, environment 1.60s, prepare 294ms)
+
+ FAIL  src/ReviewQueue.test.tsx > review actions > lists held items; outage holds cannot be approved
+Error: expect(element).toBeDisabled()
+
+Received element is not disabled:
+  <button />
+ ❯ src/ReviewQueue.test.tsx:77:70
+     75|     const approve = within(rows[1]).getByRole("button", { name: "Appro…
+     76|     expect(approve).toBeEnabled();
+     77|     expect(within(rows[2]).getByRole("button", { name: "Approve" })).t…
+       |                                                                      ^
+     78|     expect(within(rows[2]).getByRole("button", { name: "Reject" })).to…
+     79|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/ReviewQueue.test.tsx > review actions > a failed approve shows the error and keeps the item
+Error: expect(element).toHaveTextContent()
+
+Expected element to have text content:
+  /could not approve.*409.*not_held/i
+Received:
+  approve failed (HTTP 409)
+ ❯ src/ReviewQueue.test.tsx:87:46
+     85|     render(<ReviewQueue identity={admin} />);
+     86|     fireEvent.click(await screen.findByRole("button", { name: "Approve…
+     87|     expect(await screen.findByRole("alert")).toHaveTextContent(/could …
+       |                                              ^
+     88|     expect(screen.getByText("m1")).toBeInTheDocument();
+     89|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+

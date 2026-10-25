@@ -1,0 +1,135 @@
+[0.21] phase normal: burst of 200 x 40-frame videos
+[24.03] phase outage (timeout): burst of 200
+[85.86] phase recovery: waiting for every upload to be decided
+{
+  "uploads_accepted": 555,
+  "published_unchecked": 0,
+  "audit": {
+    "published_total": 487,
+    "published_unchecked": 0,
+    "check_a_published_without_provider_score": 0,
+    "check_b_published_against_policy": 0,
+    "check_c_published_without_covering_result": 0,
+    "examples": {
+      "a": [],
+      "b": [],
+      "c": []
+    }
+  },
+  "provider_calls_total": 567,
+  "provider_calls_per_upload": 1.022,
+  "provider_scored_per_upload": 1.0,
+  "max_calls_for_one_media": 4,
+  "media_scored_more_than_once": 0,
+  "prohibited_prompts_accepted": 0,
+  "safe_prompts_refused": 0,
+  "final_decision_differs_from_oracle": 0,
+  "oldest_unresolved_job_age_max_s": {
+    "normal": {
+      "ws_verified": 0.9,
+      "ws_unverified": 0.0
+    },
+    "outage": {
+      "ws_verified": 61.0,
+      "ws_unverified": 59.9
+    },
+    "recovery": {
+      "ws_unverified": 68.0,
+      "ws_verified": 70.7
+    }
+  },
+  "backlog_drained_s_after_recovery": 11.1,
+  "final_status_counts": {
+    "ws_unverified": {
+      "published": 122,
+      "blocked": 33
+    },
+    "ws_verified": {
+      "published": 365,
+      "blocked": 20,
+      "held:needs_human_review": 15
+    }
+  },
+  "latency_by_workspace_phase": {
+    "ws_verified/normal": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 1.21,
+        "p95": 1.92,
+        "max": 2.04
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 1.21,
+        "p95": 1.92,
+        "max": 2.04
+      }
+    },
+    "ws_unverified/normal": {
+      "count": 23,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 23,
+        "p50": 0.12,
+        "p95": 1.06,
+        "max": 1.18
+      },
+      "time_to_decision_s": {
+        "n": 23,
+        "p50": 0.12,
+        "p95": 1.06,
+        "max": 1.18
+      }
+    },
+    "ws_verified/outage": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 9.58,
+        "p95": 10.73,
+        "max": 10.8
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 70.83,
+        "p95": 71.62,
+        "max": 71.68
+      }
+    },
+    "ws_unverified/outage": {
+      "count": 70,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 70,
+        "p50": 0.98,
+        "p95": 3.45,
+        "max": 4.09
+      },
+      "time_to_decision_s": {
+        "n": 70,
+        "p50": 45.2,
+        "p95": 68.53,
+        "max": 69.02
+      }
+    },
+    "ws_unverified/recovery": {
+      "count": 62,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 62,
+        "p50": 1.02,
+        "p95": 1.04,
+        "max": 3.03
+      },
+      "time_to_decision_s": {
+        "n": 62,
+        "p50": 1.03,
+        "p95": 7.07,
+        "max": 9.1
+      }
+    }
+  }
+}

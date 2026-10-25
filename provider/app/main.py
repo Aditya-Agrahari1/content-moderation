@@ -22,6 +22,7 @@ import sys
 import uuid
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import UTC, datetime
 
 import httpx
 from fastapi import FastAPI, Request
@@ -42,7 +43,8 @@ log = logging.getLogger("provider")
 
 
 def emit(event: str, **fields) -> None:
-    log.info(json.dumps({"service": "provider", "event": event, **fields}))
+    ts = datetime.now(UTC).isoformat(timespec="milliseconds")
+    log.info(json.dumps({"ts": ts, "service": "provider", "event": event, **fields}))
 
 
 @dataclass

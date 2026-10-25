@@ -328,9 +328,10 @@ Keyword lists alone fail because adversaries invent new euphemisms faster than a
 
 ## 8. Time spent and AI use
 
-- **Time:** about 3 h 30 min, from 22:10 to about 01:40 IST.
+- **Time:** about 2 h 45 min of implementation, from 22:10 to 00:55 IST.
   - That includes about 45 minutes waiting on slow Docker Hub base-image downloads at setup.
-  - Writing the plan before the timed work isn't included; `PLAN.md` is in the repo.
+  - Writing and reviewing the plan beforehand isn't included; `PLAN.md` is in the repo.
+- **Fresh-clone check:** [`evidence/fresh_clone.txt`](evidence/fresh_clone.txt). A clean `git clone` plus `docker compose up -d --build` with the default compose file started all 7 containers. The contract smoke checks passed, the review page returned 200, and the full suite in that clone passed (171).
 - **AI use:** see [AI.md](AI.md) for tools, what was checked, the incorrect suggestions that were caught, and what isn't verified.
 - **Design decisions:** [DECISIONS.md](DECISIONS.md).
 - **Plan versus implementation:** [PLAN.md](PLAN.md) was the plan. Deviations:

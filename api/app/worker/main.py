@@ -11,8 +11,8 @@ import httpx
 from app import db, log, wakeup
 from app.config import settings
 from app.policy import PolicyDecision, evaluate_policy
+from app.provider_client import validate_frames
 
-SCREEN_FRAMES = 8  # BUG 2: only the first 8 frames are screened ("to keep provider cost down")
 REDELIVER_AFTER_S = 2  # jobs 'processing' longer than this are assumed lost and re-queued
 
 
@@ -43,7 +43,7 @@ async def process(job: dict, http: httpx.AsyncClient) -> None:
         "SELECT m.frames, w.verified FROM media m JOIN workspaces w ON w.id = m.workspace_id WHERE m.id = $1",
         job["media_id"],
     )
-    frames = media["frames"][:SCREEN_FRAMES]
+    frames = media["frames"]  # every frame counts, not just the beginning
     ids = {"media_id": job["media_id"], "job_id": job["id"], "workspace_id": job["workspace_id"],
            "attempt": job["attempt"]}
     log.info("provider_call", **ids, frames=len(frames))
@@ -58,7 +58,10 @@ async def process(job: dict, http: httpx.AsyncClient) -> None:
             )
             return
         response.raise_for_status()
-        decision = evaluate_policy(response.json()["frames"], media["verified"])
+        scores = validate_frames(response.json().get("frames"), len(frames))
+        if scores is None:  # a partial or malformed answer is not a decision
+            raise httpx.HTTPError("provider response does not cover every frame and label")
+        decision = evaluate_policy(scores, media["verified"])
     except httpx.TimeoutException:
         # BUG 1: a slow provider must not block creators, so a timeout counts as a pass.
         log.warning("provider_outcome", **ids, provider_outcome="timeout")

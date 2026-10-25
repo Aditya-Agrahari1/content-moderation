@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from app import db, log, signing
 from app.config import settings
 from app.policy import evaluate_policy
+from app.provider_client import validate_frames
 
 router = APIRouter()
 
@@ -30,7 +31,11 @@ async def provider_callback(request: Request):
         )
         if media is None:
             return JSONResponse(content={"status": "ignored"})
-        decision = evaluate_policy(frames, media["verified"])
+        frame_count = await conn.fetchval("SELECT jsonb_array_length(frames) FROM media WHERE id = $1", media["id"])
+        scores = validate_frames(frames, frame_count)
+        if scores is None:
+            return JSONResponse(status_code=422, content={"detail": "callback does not cover every frame and label"})
+        decision = evaluate_policy(scores, media["verified"])
         await conn.execute(
             "UPDATE media SET status = $1, reasons = $2, updated_at = now() WHERE id = $3",
             decision.decision, decision.reasons, media["id"],

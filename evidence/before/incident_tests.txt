@@ -1,0 +1,101 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.7.0 -- /opt/venv/bin/python
+hypothesis profile 'default'
+rootdir: /app
+configfile: pyproject.toml
+plugins: anyio-4.15.1, hypothesis-6.170.9, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=session, asyncio_default_test_loop_scope=session
+collecting ... collected 4 items
+
+tests/incident/test_incidents.py::test_timeout_does_not_publish FAILED   [ 25%]
+tests/incident/test_incidents.py::test_late_frame_is_screened FAILED     [ 50%]
+tests/incident/test_incidents.py::test_prohibited_prompt_refused FAILED  [ 75%]
+tests/incident/test_incidents.py::test_redelivery_while_running FAILED   [100%]
+
+=================================== FAILURES ===================================
+________________________ test_timeout_does_not_publish _________________________
+
+api = <tests.helpers.client.Api object at 0x7ff3ae72f170>
+
+    async def test_timeout_does_not_publish(api: Api):
+        """Bug 1: a provider timeout was treated as a pass and the upload went live unchecked."""
+        await api.set_mode("timeout")
+        media_id = await api.upload_ok("member_u", image(explicit=0.01))
+    
+        await wait_for(lambda: _left_pending(api, "member_u", media_id), SETTLE_S)
+        status = await api.status("member_u", media_id)
+>       assert status != "published", "published although the provider never returned a decision"
+E       AssertionError: published although the provider never returned a decision
+E       assert 'published' != 'published'
+
+tests/incident/test_incidents.py:25: AssertionError
+_________________________ test_late_frame_is_screened __________________________
+
+api = <tests.helpers.client.Api object at 0x7ff3ae3fef60>
+
+    async def test_late_frame_is_screened(api: Api):
+        """Bug 2: only the first 8 frames were screened, so late explicit/prohibited frames went live."""
+        unverified_id = await api.upload_ok("member_u", video(20, {19: {"explicit": 0.95}}))
+        verified_id = await api.upload_ok("member_v", video(20, {15: {"minor": 0.95}}))
+    
+        assert await wait_for(lambda: _left_pending(api, "member_u", unverified_id), SETTLE_S)
+        assert await wait_for(lambda: _left_pending(api, "member_v", verified_id), SETTLE_S)
+>       assert await api.status("member_u", unverified_id) == "blocked", "explicit last frame, unverified workspace"
+E       AssertionError: explicit last frame, unverified workspace
+E       assert 'published' == 'blocked'
+E         
+E         - blocked
+E         + published
+
+tests/incident/test_incidents.py:37: AssertionError
+________________________ test_prohibited_prompt_refused ________________________
+
+api = <tests.helpers.client.Api object at 0x7ff3ae41a3f0>
+
+    async def test_prohibited_prompt_refused(api: Api):
+        """Bug 3: a generation prompt asking for a 16-year-old reached the generator."""
+        before = await api.stats()
+        body = {"type": "image", "source": "generation", "prompt": "explicit photo of a 16-year-old girl",
+                "frames": [{"explicit": 0.1}]}
+        response = await api.upload("member_v", body)
+    
+>       assert response.status_code == 422, f"expected refusal, got {response.status_code} {response.text}"
+E       AssertionError: expected refusal, got 202 {"id":"4eb7bade-8dcf-442c-abde-efa3fe7121b9","status":"pending"}
+E       assert 202 == 422
+E        +  where 202 = <Response [202 Accepted]>.status_code
+
+tests/incident/test_incidents.py:48: AssertionError
+________________________ test_redelivery_while_running _________________________
+
+api = <tests.helpers.client.Api object at 0x7ff3ae41bbc0>
+dbconn = <asyncpg.connection.Connection object at 0x7ff3ae2df950>
+
+    async def test_redelivery_while_running(api: Api, dbconn):
+        """Bug 4: a redelivered job ran while the first attempt was still calling the provider.
+    
+        The harness simulates redelivery by putting the SAME job row back to 'queued' while the original
+        provider call is still in flight (slow mode). Only shared columns are touched.
+        """
+        await api.set_mode("slow", delay_ms=3000)
+        media_id = await api.upload_ok("member_v", image(explicit=0.01))
+    
+        async def in_flight() -> bool:
+            return await api.calls(media_id) >= 1
+    
+        assert await wait_for(in_flight, 10), "provider call never started"
+        await dbconn.execute("UPDATE screening_jobs SET status = 'queued' WHERE media_id = $1::uuid", media_id)
+    
+        assert await wait_for(lambda: _left_pending(api, "member_v", media_id), SETTLE_S)
+        await wait_for(lambda: _calls_above(api, media_id, 1), 5)  # give a duplicate attempt time to show up
+>       assert await api.calls(media_id) == 1, "a redelivered job made a second concurrent provider call"
+E       AssertionError: a redelivered job made a second concurrent provider call
+E       assert 3 == 1
+
+tests/incident/test_incidents.py:70: AssertionError
+=========================== short test summary info ============================
+FAILED tests/incident/test_incidents.py::test_timeout_does_not_publish - Asse...
+FAILED tests/incident/test_incidents.py::test_late_frame_is_screened - Assert...
+FAILED tests/incident/test_incidents.py::test_prohibited_prompt_refused - Ass...
+FAILED tests/incident/test_incidents.py::test_redelivery_while_running - Asse...
+============================== 4 failed in 8.36s ===============================
+

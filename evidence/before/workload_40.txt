@@ -1,0 +1,184 @@
+[0.18] phase normal: burst of 200 x 40-frame videos
+[22.47] phase outage (timeout): burst of 200
+[83.98] phase recovery: waiting for every upload to be decided
+{
+  "uploads_accepted": 519,
+  "published_unchecked": 116,
+  "audit": {
+    "published_total": 500,
+    "published_unchecked": 116,
+    "check_a_published_without_provider_score": 83,
+    "check_b_published_against_policy": 40,
+    "check_c_published_without_covering_result": "skipped (no screening_results table)",
+    "examples": {
+      "a": [
+        {
+          "id": "939dd14a-b958-415f-8237-181d57acccb5",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "5e1f8b33-6649-4921-ad6c-a4a94bac7ccd",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "24041938-d74c-434d-94bc-8fa49d57c354",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "e62b586f-d9e1-47a3-a86d-837927154ed8",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "5f54d439-8e13-4415-a57b-e773d368a09a",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        }
+      ],
+      "b": [
+        {
+          "id": "0b6076b4-b3f4-4aae-8a1c-2a44cabd5145",
+          "workspace_id": "ws_verified",
+          "expected": "blocked"
+        },
+        {
+          "id": "48c4c053-3a45-4f5d-bdf8-779c0288abbc",
+          "workspace_id": "ws_verified",
+          "expected": "blocked"
+        },
+        {
+          "id": "3c0beb6a-d9b3-4dee-ab3f-deefb3ccb464",
+          "workspace_id": "ws_verified",
+          "expected": "blocked"
+        },
+        {
+          "id": "6b1fb5cf-8fc9-4fc7-9777-86ced543b0b4",
+          "workspace_id": "ws_verified",
+          "expected": "blocked"
+        },
+        {
+          "id": "e6c38c09-50af-424e-abdd-99e7b59c69fc",
+          "workspace_id": "ws_verified",
+          "expected": "held"
+        }
+      ],
+      "c": []
+    }
+  },
+  "provider_calls_total": 604,
+  "provider_calls_per_upload": 1.164,
+  "provider_scored_per_upload": 0.84,
+  "max_calls_for_one_media": 2,
+  "media_scored_more_than_once": 0,
+  "prohibited_prompts_accepted": 5,
+  "safe_prompts_refused": 0,
+  "final_decision_differs_from_oracle": 40,
+  "oldest_unresolved_job_age_max_s": {
+    "normal": {
+      "ws_verified": 0.0
+    },
+    "outage": {
+      "ws_verified": 60.5,
+      "ws_unverified": 60.5
+    },
+    "recovery": {
+      "ws_unverified": 62.5,
+      "ws_verified": 62.5
+    }
+  },
+  "backlog_drained_s_after_recovery": 2.0,
+  "final_status_counts": {
+    "ws_unverified": {
+      "published": 100,
+      "blocked": 19
+    },
+    "ws_verified": {
+      "published": 400
+    }
+  },
+  "latency_by_workspace_phase": {
+    "ws_verified/normal": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 0.66,
+        "p95": 1.12,
+        "max": 1.2
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 0.66,
+        "p95": 1.12,
+        "max": 1.2
+      }
+    },
+    "ws_unverified/normal": {
+      "count": 22,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 22,
+        "p50": 0.79,
+        "p95": 0.84,
+        "max": 1.13
+      },
+      "time_to_decision_s": {
+        "n": 22,
+        "p50": 0.79,
+        "p95": 0.84,
+        "max": 1.13
+      }
+    },
+    "ws_verified/outage": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 62.81,
+        "p95": 63.47,
+        "max": 63.54
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 62.81,
+        "p95": 63.47,
+        "max": 63.54
+      }
+    },
+    "ws_unverified/outage": {
+      "count": 76,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 76,
+        "p50": 40.76,
+        "p95": 62.68,
+        "max": 63.53
+      },
+      "time_to_decision_s": {
+        "n": 76,
+        "p50": 40.76,
+        "p95": 62.68,
+        "max": 63.53
+      }
+    },
+    "ws_unverified/recovery": {
+      "count": 21,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 21,
+        "p50": 0.8,
+        "p95": 0.81,
+        "max": 1.82
+      },
+      "time_to_decision_s": {
+        "n": 21,
+        "p50": 0.8,
+        "p95": 0.81,
+        "max": 1.82
+      }
+    }
+  }
+}

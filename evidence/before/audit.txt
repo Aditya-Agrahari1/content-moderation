@@ -1,0 +1,64 @@
+{
+  "published_total": 1488,
+  "published_unchecked": 371,
+  "check_a_published_without_provider_score": 259,
+  "check_b_published_against_policy": 136,
+  "check_c_published_without_covering_result": "skipped (no screening_results table)",
+  "examples": {
+    "a": [
+      {
+        "id": "3cf252c6-0976-44ae-8428-29e7eefe5cac",
+        "workspace_id": "ws_unverified",
+        "provider_calls": 2
+      },
+      {
+        "id": "def9df63-74e4-4db4-b82c-5e41fd97c75c",
+        "workspace_id": "ws_verified",
+        "provider_calls": 2
+      },
+      {
+        "id": "85d98beb-6c4f-43b8-95a9-15f3b91622c4",
+        "workspace_id": "ws_verified",
+        "provider_calls": 2
+      },
+      {
+        "id": "c5a1482d-280f-4edc-8bb5-44aa42eb06e7",
+        "workspace_id": "ws_verified",
+        "provider_calls": 2
+      },
+      {
+        "id": "ff2f1ed6-aec7-4708-87a9-c88e2bf49779",
+        "workspace_id": "ws_verified",
+        "provider_calls": 2
+      }
+    ],
+    "b": [
+      {
+        "id": "df40fc56-ac81-423c-9a2c-539bc4379f76",
+        "workspace_id": "ws_unverified",
+        "expected": "blocked"
+      },
+      {
+        "id": "1e7bf56d-e294-4989-b604-73a1c059af10",
+        "workspace_id": "ws_verified",
+        "expected": "blocked"
+      },
+      {
+        "id": "c52215b1-8de6-430b-8f16-7043951b5b09",
+        "workspace_id": "ws_verified",
+        "expected": "held"
+      },
+      {
+        "id": "c5f5b395-56f9-4091-8ae4-5385e4f76499",
+        "workspace_id": "ws_verified",
+        "expected": "held"
+      },
+      {
+        "id": "7a65863a-f8f1-4e43-8615-08c44b843f6a",
+        "workspace_id": "ws_verified",
+        "expected": "blocked"
+      }
+    ],
+    "c": []
+  }
+}

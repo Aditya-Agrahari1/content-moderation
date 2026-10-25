@@ -1,0 +1,124 @@
+﻿
+ RUN  v2.1.8 C:/Users/agrah/OneDrive/Desktop/Content_moderation_v2/frontend
+
+ ❯ src/ReviewQueue.test.tsx (4 tests | 2 failed) 2083ms
+   × review queue states (incident bug 5) > an HTTP 500 is shown as a failure with Retry, never as 'Nothing to review' 1016ms
+     → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+   × review queue states (incident bug 5) > a network error is shown as a failure, never as 'Nothing to review' 1004ms
+     → Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+npx : ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+At line:1 char:388
++ ... _COLOR='1'; npx vitest run *> ..\evidence\before\frontend_tests.txt;  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+ FAIL  src/ReviewQueue.test.tsx > review queue states (incident bug 5) > an HTTP 500 is shown as a failure with Retry, 
+never as 'Nothing to review'
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/ReviewQueue.test.tsx:27:25
+     25|     mockFetch(() => json(500, { detail: "Internal server error" }));
+     26|     render(<ReviewQueue identity={admin} />);
+     27|     expect(await screen.findByRole("alert")).toHaveTextContent(/could …
+       |                         ^
+     28|     expect(screen.getByRole("button", { name: /retry/i })).toBeInTheDo…
+     29|     expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/ReviewQueue.test.tsx > review queue states (incident bug 5) > a network error is shown as a failure, never 
+as 'Nothing to review'
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mNothing to review[0m
+    [36m</p>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/ReviewQueue.test.tsx:35:25
+     33|     mockFetch(() => Promise.reject(new TypeError("Failed to fetch")));
+     34|     render(<ReviewQueue identity={admin} />);
+     35|     expect(await screen.findByRole("alert")).toHaveTextContent(/could …
+       |                         ^
+     36|     expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocu…
+     37|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  23:14:02
+   Duration  4.78s (transform 119ms, setup 569ms, collect 83ms, tests 2.08s, environment 1.56s, prepare 145ms)
+

@@ -1,0 +1,2252 @@
+{
+  "params": {
+    "out": "evidence/before/workload.json",
+    "burst": 200,
+    "video_frames": 20,
+    "image_interval": 1.0,
+    "normal_s": 20,
+    "outage_s": 60,
+    "recovery_max_s": 180,
+    "outage_mode": "timeout",
+    "seed": 42
+  },
+  "uploads_accepted": 510,
+  "published_unchecked": 126,
+  "audit": {
+    "published_total": 485,
+    "published_unchecked": 126,
+    "check_a_published_without_provider_score": 87,
+    "check_b_published_against_policy": 47,
+    "check_c_published_without_covering_result": "skipped (no screening_results table)",
+    "examples": {
+      "a": [
+        {
+          "id": "de88db0a-b05b-4f99-8995-14d66cf48027",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "f2de5c9d-2be3-4eca-b55c-748c673f5fe1",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "32fdaffe-ba0a-4752-b86a-f2c732f6011e",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "135f3521-4461-4fb7-afa7-78c347a2e330",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        },
+        {
+          "id": "7e51dfe6-9f3e-43bc-8792-284848f9a158",
+          "workspace_id": "ws_verified",
+          "provider_calls": 2
+        }
+      ],
+      "b": [
+        {
+          "id": "0f9bfff6-d326-48c9-bb3e-b634993a0a7f",
+          "workspace_id": "ws_verified",
+          "expected": "held"
+        },
+        {
+          "id": "c34cad1e-adcd-4148-85ce-becbda3b7df9",
+          "workspace_id": "ws_verified",
+          "expected": "held"
+        },
+        {
+          "id": "7d35ad35-822c-4ae9-b4d7-13a7ebe153d9",
+          "workspace_id": "ws_verified",
+          "expected": "held"
+        },
+        {
+          "id": "bd207a8f-4657-440e-a1b0-4fdace773694",
+          "workspace_id": "ws_verified",
+          "expected": "blocked"
+        },
+        {
+          "id": "31baa56b-69bf-4685-807b-8d389f4db90c",
+          "workspace_id": "ws_verified",
+          "expected": "held"
+        }
+      ],
+      "c": []
+    }
+  },
+  "provider_calls_total": 591,
+  "provider_calls_per_upload": 1.159,
+  "provider_scored_per_upload": 0.829,
+  "max_calls_for_one_media": 2,
+  "media_scored_more_than_once": 0,
+  "prohibited_prompts_accepted": 5,
+  "safe_prompts_refused": 0,
+  "final_decision_differs_from_oracle": 47,
+  "oldest_unresolved_job_age_max_s": {
+    "outage": {
+      "ws_verified": 60.3,
+      "ws_unverified": 59.4
+    },
+    "recovery": {
+      "ws_unverified": 62.5,
+      "ws_verified": 62.8
+    }
+  },
+  "backlog_drained_s_after_recovery": 3.1,
+  "final_status_counts": {
+    "ws_unverified": {
+      "published": 85,
+      "blocked": 25
+    },
+    "ws_verified": {
+      "published": 400
+    }
+  },
+  "latency_by_workspace_phase": {
+    "ws_verified/normal": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 0.74,
+        "p95": 1.1,
+        "max": 1.16
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 0.74,
+        "p95": 1.1,
+        "max": 1.16
+      }
+    },
+    "ws_unverified/normal": {
+      "count": 22,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 22,
+        "p50": 0.92,
+        "p95": 0.98,
+        "max": 1.09
+      },
+      "time_to_decision_s": {
+        "n": 22,
+        "p50": 0.92,
+        "p95": 0.98,
+        "max": 1.09
+      }
+    },
+    "ws_verified/outage": {
+      "count": 200,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 200,
+        "p50": 62.89,
+        "p95": 63.7,
+        "max": 63.8
+      },
+      "time_to_decision_s": {
+        "n": 200,
+        "p50": 62.89,
+        "p95": 63.7,
+        "max": 63.8
+      }
+    },
+    "ws_unverified/outage": {
+      "count": 76,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 76,
+        "p50": 41.66,
+        "p95": 63.5,
+        "max": 63.53
+      },
+      "time_to_decision_s": {
+        "n": 76,
+        "p50": 41.66,
+        "p95": 63.5,
+        "max": 63.53
+      }
+    },
+    "ws_unverified/recovery": {
+      "count": 12,
+      "undecided_at_end": 0,
+      "time_to_leave_pending_s": {
+        "n": 12,
+        "p50": 0.48,
+        "p95": 1.61,
+        "max": 2.66
+      },
+      "time_to_decision_s": {
+        "n": 12,
+        "p50": 0.48,
+        "p95": 1.61,
+        "max": 2.66
+      }
+    }
+  },
+  "timeline": [
+    {
+      "t": 0.21,
+      "phase": "normal",
+      "jobs": {},
+      "media": {}
+    },
+    {
+      "t": 1.41,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 110
+        },
+        "ws_unverified": {
+          "published": 1
+        }
+      }
+    },
+    {
+      "t": 2.42,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "published": 2
+        }
+      }
+    },
+    {
+      "t": 3.42,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 2
+        }
+      }
+    },
+    {
+      "t": 4.43,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 3
+        }
+      }
+    },
+    {
+      "t": 5.43,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 4
+        }
+      }
+    },
+    {
+      "t": 6.44,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 5
+        }
+      }
+    },
+    {
+      "t": 7.45,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 6
+        }
+      }
+    },
+    {
+      "t": 8.45,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 7
+        }
+      }
+    },
+    {
+      "t": 9.46,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 8
+        }
+      }
+    },
+    {
+      "t": 10.46,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 1,
+          "published": 9
+        }
+      }
+    },
+    {
+      "t": 11.47,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 2,
+          "published": 9
+        }
+      }
+    },
+    {
+      "t": 12.47,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 3,
+          "published": 9
+        }
+      }
+    },
+    {
+      "t": 13.48,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 4,
+          "published": 9
+        }
+      }
+    },
+    {
+      "t": 14.49,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 4,
+          "published": 10
+        }
+      }
+    },
+    {
+      "t": 15.49,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 4,
+          "published": 11
+        }
+      }
+    },
+    {
+      "t": 16.5,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 4,
+          "published": 12
+        }
+      }
+    },
+    {
+      "t": 17.5,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_verified": {
+          "published": 200
+        },
+        "ws_unverified": {
+          "blocked": 5,
+          "published": 12
+        }
+      }
+    },
+    {
+      "t": 18.51,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 13,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 200
+        }
+      }
+    },
+    {
+      "t": 19.51,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 14,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 200
+        }
+      }
+    },
+    {
+      "t": 20.52,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 15,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 200
+        }
+      }
+    },
+    {
+      "t": 21.52,
+      "phase": "normal",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 16,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 200
+        }
+      }
+    },
+    {
+      "t": 22.6,
+      "phase": "outage",
+      "jobs": {
+        "ws_verified": {
+          "oldest_s": 0.4,
+          "unresolved": 58
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 200,
+          "pending": 57
+        }
+      }
+    },
+    {
+      "t": 23.63,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 0.8,
+          "unresolved": 1
+        },
+        "ws_verified": {
+          "oldest_s": 1.5,
+          "unresolved": 183
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 1
+        },
+        "ws_verified": {
+          "published": 200,
+          "pending": 183
+        }
+      }
+    },
+    {
+      "t": 24.64,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 1.9,
+          "unresolved": 17
+        },
+        "ws_verified": {
+          "oldest_s": 2.5,
+          "unresolved": 200
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 17
+        },
+        "ws_verified": {
+          "published": 200,
+          "pending": 200
+        }
+      }
+    },
+    {
+      "t": 25.65,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 2.9,
+          "unresolved": 18
+        },
+        "ws_verified": {
+          "oldest_s": 3.5,
+          "unresolved": 192
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 18
+        },
+        "ws_verified": {
+          "published": 208,
+          "pending": 192
+        }
+      }
+    },
+    {
+      "t": 26.66,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 3.9,
+          "unresolved": 19
+        },
+        "ws_verified": {
+          "oldest_s": 4.5,
+          "unresolved": 192
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 19
+        },
+        "ws_verified": {
+          "published": 208,
+          "pending": 192
+        }
+      }
+    },
+    {
+      "t": 27.67,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 4.9,
+          "unresolved": 20
+        },
+        "ws_verified": {
+          "oldest_s": 5.5,
+          "unresolved": 192
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 20
+        },
+        "ws_verified": {
+          "published": 208,
+          "pending": 192
+        }
+      }
+    },
+    {
+      "t": 28.67,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 5.9,
+          "unresolved": 21
+        },
+        "ws_verified": {
+          "oldest_s": 6.5,
+          "unresolved": 189
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 21
+        },
+        "ws_verified": {
+          "published": 211,
+          "pending": 189
+        }
+      }
+    },
+    {
+      "t": 29.68,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 6.9,
+          "unresolved": 22
+        },
+        "ws_verified": {
+          "oldest_s": 7.5,
+          "unresolved": 189
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 22
+        },
+        "ws_verified": {
+          "published": 211,
+          "pending": 189
+        }
+      }
+    },
+    {
+      "t": 30.69,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 7.9,
+          "unresolved": 23
+        },
+        "ws_verified": {
+          "oldest_s": 8.5,
+          "unresolved": 189
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 23
+        },
+        "ws_verified": {
+          "published": 211,
+          "pending": 189
+        }
+      }
+    },
+    {
+      "t": 31.7,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 8.9,
+          "unresolved": 24
+        },
+        "ws_verified": {
+          "oldest_s": 9.4,
+          "unresolved": 184
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 24
+        },
+        "ws_verified": {
+          "published": 216,
+          "pending": 184
+        }
+      }
+    },
+    {
+      "t": 32.71,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 9.9,
+          "unresolved": 25
+        },
+        "ws_verified": {
+          "oldest_s": 10.5,
+          "unresolved": 184
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 25
+        },
+        "ws_verified": {
+          "published": 216,
+          "pending": 184
+        }
+      }
+    },
+    {
+      "t": 33.72,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 10.9,
+          "unresolved": 26
+        },
+        "ws_verified": {
+          "oldest_s": 11.5,
+          "unresolved": 184
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 26
+        },
+        "ws_verified": {
+          "published": 216,
+          "pending": 184
+        }
+      }
+    },
+    {
+      "t": 34.72,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 11.9,
+          "unresolved": 27
+        },
+        "ws_verified": {
+          "oldest_s": 12.5,
+          "unresolved": 181
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 27
+        },
+        "ws_verified": {
+          "published": 219,
+          "pending": 181
+        }
+      }
+    },
+    {
+      "t": 35.73,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 13.0,
+          "unresolved": 28
+        },
+        "ws_verified": {
+          "oldest_s": 13.5,
+          "unresolved": 181
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 28
+        },
+        "ws_verified": {
+          "published": 219,
+          "pending": 181
+        }
+      }
+    },
+    {
+      "t": 36.74,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 14.0,
+          "unresolved": 29
+        },
+        "ws_verified": {
+          "oldest_s": 14.5,
+          "unresolved": 181
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 29
+        },
+        "ws_verified": {
+          "published": 219,
+          "pending": 181
+        }
+      }
+    },
+    {
+      "t": 37.75,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 15.0,
+          "unresolved": 30
+        },
+        "ws_verified": {
+          "oldest_s": 15.5,
+          "unresolved": 176
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 30
+        },
+        "ws_verified": {
+          "published": 224,
+          "pending": 176
+        }
+      }
+    },
+    {
+      "t": 38.76,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 16.0,
+          "unresolved": 31
+        },
+        "ws_verified": {
+          "oldest_s": 16.5,
+          "unresolved": 176
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 31
+        },
+        "ws_verified": {
+          "published": 224,
+          "pending": 176
+        }
+      }
+    },
+    {
+      "t": 39.77,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 17.0,
+          "unresolved": 32
+        },
+        "ws_verified": {
+          "oldest_s": 17.5,
+          "unresolved": 176
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 32
+        },
+        "ws_verified": {
+          "published": 224,
+          "pending": 176
+        }
+      }
+    },
+    {
+      "t": 40.77,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 18.0,
+          "unresolved": 33
+        },
+        "ws_verified": {
+          "oldest_s": 18.5,
+          "unresolved": 173
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 33
+        },
+        "ws_verified": {
+          "published": 227,
+          "pending": 173
+        }
+      }
+    },
+    {
+      "t": 41.78,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 19.0,
+          "unresolved": 34
+        },
+        "ws_verified": {
+          "oldest_s": 19.5,
+          "unresolved": 173
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 34
+        },
+        "ws_verified": {
+          "published": 227,
+          "pending": 173
+        }
+      }
+    },
+    {
+      "t": 42.79,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 20.0,
+          "unresolved": 35
+        },
+        "ws_verified": {
+          "oldest_s": 20.5,
+          "unresolved": 173
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 35
+        },
+        "ws_verified": {
+          "published": 227,
+          "pending": 173
+        }
+      }
+    },
+    {
+      "t": 43.8,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 21.0,
+          "unresolved": 36
+        },
+        "ws_verified": {
+          "oldest_s": 21.5,
+          "unresolved": 168
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 36
+        },
+        "ws_verified": {
+          "published": 232,
+          "pending": 168
+        }
+      }
+    },
+    {
+      "t": 44.8,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 22.0,
+          "unresolved": 37
+        },
+        "ws_verified": {
+          "oldest_s": 22.5,
+          "unresolved": 168
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 37
+        },
+        "ws_verified": {
+          "published": 232,
+          "pending": 168
+        }
+      }
+    },
+    {
+      "t": 45.81,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 23.0,
+          "unresolved": 38
+        },
+        "ws_verified": {
+          "oldest_s": 23.5,
+          "unresolved": 168
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 38
+        },
+        "ws_verified": {
+          "published": 232,
+          "pending": 168
+        }
+      }
+    },
+    {
+      "t": 46.82,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 24.0,
+          "unresolved": 39
+        },
+        "ws_verified": {
+          "oldest_s": 24.5,
+          "unresolved": 165
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 39
+        },
+        "ws_verified": {
+          "published": 235,
+          "pending": 165
+        }
+      }
+    },
+    {
+      "t": 47.83,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 25.1,
+          "unresolved": 40
+        },
+        "ws_verified": {
+          "oldest_s": 25.5,
+          "unresolved": 165
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 40
+        },
+        "ws_verified": {
+          "published": 235,
+          "pending": 165
+        }
+      }
+    },
+    {
+      "t": 48.84,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 26.1,
+          "unresolved": 41
+        },
+        "ws_verified": {
+          "oldest_s": 26.5,
+          "unresolved": 165
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 41
+        },
+        "ws_verified": {
+          "published": 235,
+          "pending": 165
+        }
+      }
+    },
+    {
+      "t": 49.84,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 27.1,
+          "unresolved": 42
+        },
+        "ws_verified": {
+          "oldest_s": 27.4,
+          "unresolved": 160
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 42
+        },
+        "ws_verified": {
+          "published": 240,
+          "pending": 160
+        }
+      }
+    },
+    {
+      "t": 50.85,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 28.1,
+          "unresolved": 43
+        },
+        "ws_verified": {
+          "oldest_s": 28.5,
+          "unresolved": 160
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 43
+        },
+        "ws_verified": {
+          "published": 240,
+          "pending": 160
+        }
+      }
+    },
+    {
+      "t": 51.86,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 29.1,
+          "unresolved": 44
+        },
+        "ws_verified": {
+          "oldest_s": 29.5,
+          "unresolved": 160
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 44
+        },
+        "ws_verified": {
+          "published": 240,
+          "pending": 160
+        }
+      }
+    },
+    {
+      "t": 52.87,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 30.1,
+          "unresolved": 45
+        },
+        "ws_verified": {
+          "oldest_s": 30.4,
+          "unresolved": 157
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 45
+        },
+        "ws_verified": {
+          "published": 243,
+          "pending": 157
+        }
+      }
+    },
+    {
+      "t": 53.87,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 31.1,
+          "unresolved": 46
+        },
+        "ws_verified": {
+          "oldest_s": 31.4,
+          "unresolved": 157
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 46
+        },
+        "ws_verified": {
+          "published": 243,
+          "pending": 157
+        }
+      }
+    },
+    {
+      "t": 54.88,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 32.1,
+          "unresolved": 47
+        },
+        "ws_verified": {
+          "oldest_s": 32.5,
+          "unresolved": 157
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 47
+        },
+        "ws_verified": {
+          "published": 243,
+          "pending": 157
+        }
+      }
+    },
+    {
+      "t": 55.89,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 33.1,
+          "unresolved": 48
+        },
+        "ws_verified": {
+          "oldest_s": 33.4,
+          "unresolved": 152
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 48
+        },
+        "ws_verified": {
+          "published": 248,
+          "pending": 152
+        }
+      }
+    },
+    {
+      "t": 56.9,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 34.1,
+          "unresolved": 49
+        },
+        "ws_verified": {
+          "oldest_s": 34.4,
+          "unresolved": 152
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 49
+        },
+        "ws_verified": {
+          "published": 248,
+          "pending": 152
+        }
+      }
+    },
+    {
+      "t": 57.91,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 35.1,
+          "unresolved": 50
+        },
+        "ws_verified": {
+          "oldest_s": 35.4,
+          "unresolved": 152
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 50
+        },
+        "ws_verified": {
+          "published": 248,
+          "pending": 152
+        }
+      }
+    },
+    {
+      "t": 58.92,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 36.1,
+          "unresolved": 51
+        },
+        "ws_verified": {
+          "oldest_s": 36.4,
+          "unresolved": 149
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 51
+        },
+        "ws_verified": {
+          "published": 251,
+          "pending": 149
+        }
+      }
+    },
+    {
+      "t": 59.93,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 37.1,
+          "unresolved": 52
+        },
+        "ws_verified": {
+          "oldest_s": 37.4,
+          "unresolved": 149
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 52
+        },
+        "ws_verified": {
+          "published": 251,
+          "pending": 149
+        }
+      }
+    },
+    {
+      "t": 60.93,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 38.2,
+          "unresolved": 53
+        },
+        "ws_verified": {
+          "oldest_s": 38.4,
+          "unresolved": 149
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 53
+        },
+        "ws_verified": {
+          "published": 251,
+          "pending": 149
+        }
+      }
+    },
+    {
+      "t": 61.94,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 39.2,
+          "unresolved": 54
+        },
+        "ws_verified": {
+          "oldest_s": 39.4,
+          "unresolved": 144
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 54
+        },
+        "ws_verified": {
+          "published": 256,
+          "pending": 144
+        }
+      }
+    },
+    {
+      "t": 62.95,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 40.2,
+          "unresolved": 55
+        },
+        "ws_verified": {
+          "oldest_s": 40.4,
+          "unresolved": 144
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 55
+        },
+        "ws_verified": {
+          "published": 256,
+          "pending": 144
+        }
+      }
+    },
+    {
+      "t": 63.96,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 41.2,
+          "unresolved": 56
+        },
+        "ws_verified": {
+          "oldest_s": 41.4,
+          "unresolved": 144
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 56
+        },
+        "ws_verified": {
+          "published": 256,
+          "pending": 144
+        }
+      }
+    },
+    {
+      "t": 64.97,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 42.2,
+          "unresolved": 57
+        },
+        "ws_verified": {
+          "oldest_s": 42.4,
+          "unresolved": 141
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 57
+        },
+        "ws_verified": {
+          "published": 259,
+          "pending": 141
+        }
+      }
+    },
+    {
+      "t": 65.97,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 43.2,
+          "unresolved": 58
+        },
+        "ws_verified": {
+          "oldest_s": 43.4,
+          "unresolved": 141
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 58
+        },
+        "ws_verified": {
+          "published": 259,
+          "pending": 141
+        }
+      }
+    },
+    {
+      "t": 66.98,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 44.2,
+          "unresolved": 59
+        },
+        "ws_verified": {
+          "oldest_s": 44.4,
+          "unresolved": 141
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "blocked": 5,
+          "pending": 59
+        },
+        "ws_verified": {
+          "published": 259,
+          "pending": 141
+        }
+      }
+    },
+    {
+      "t": 67.99,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 45.2,
+          "unresolved": 60
+        },
+        "ws_verified": {
+          "oldest_s": 45.4,
+          "unresolved": 136
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 60,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 264,
+          "pending": 136
+        }
+      }
+    },
+    {
+      "t": 69.0,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 46.2,
+          "unresolved": 61
+        },
+        "ws_verified": {
+          "oldest_s": 46.4,
+          "unresolved": 136
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 61,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 264,
+          "pending": 136
+        }
+      }
+    },
+    {
+      "t": 70.01,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 47.2,
+          "unresolved": 62
+        },
+        "ws_verified": {
+          "oldest_s": 47.4,
+          "unresolved": 136
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 62,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 264,
+          "pending": 136
+        }
+      }
+    },
+    {
+      "t": 71.02,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 48.2,
+          "unresolved": 63
+        },
+        "ws_verified": {
+          "oldest_s": 48.4,
+          "unresolved": 133
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 63,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 267,
+          "pending": 133
+        }
+      }
+    },
+    {
+      "t": 72.02,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 49.2,
+          "unresolved": 64
+        },
+        "ws_verified": {
+          "oldest_s": 49.4,
+          "unresolved": 133
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 64,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 267,
+          "pending": 133
+        }
+      }
+    },
+    {
+      "t": 73.03,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 50.3,
+          "unresolved": 65
+        },
+        "ws_verified": {
+          "oldest_s": 50.4,
+          "unresolved": 133
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 65,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 267,
+          "pending": 133
+        }
+      }
+    },
+    {
+      "t": 74.04,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 51.3,
+          "unresolved": 66
+        },
+        "ws_verified": {
+          "oldest_s": 51.4,
+          "unresolved": 128
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 66,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 272,
+          "pending": 128
+        }
+      }
+    },
+    {
+      "t": 75.05,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 52.3,
+          "unresolved": 67
+        },
+        "ws_verified": {
+          "oldest_s": 52.4,
+          "unresolved": 128
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 67,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 272,
+          "pending": 128
+        }
+      }
+    },
+    {
+      "t": 76.06,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 53.3,
+          "unresolved": 68
+        },
+        "ws_verified": {
+          "oldest_s": 53.4,
+          "unresolved": 128
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 68,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 272,
+          "pending": 128
+        }
+      }
+    },
+    {
+      "t": 77.07,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 54.3,
+          "unresolved": 69
+        },
+        "ws_verified": {
+          "oldest_s": 54.4,
+          "unresolved": 125
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 69,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 275,
+          "pending": 125
+        }
+      }
+    },
+    {
+      "t": 78.08,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 55.3,
+          "unresolved": 70
+        },
+        "ws_verified": {
+          "oldest_s": 55.4,
+          "unresolved": 125
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 70,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 275,
+          "pending": 125
+        }
+      }
+    },
+    {
+      "t": 79.09,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 56.3,
+          "unresolved": 71
+        },
+        "ws_verified": {
+          "oldest_s": 56.4,
+          "unresolved": 125
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 71,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 275,
+          "pending": 125
+        }
+      }
+    },
+    {
+      "t": 80.09,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 57.3,
+          "unresolved": 72
+        },
+        "ws_verified": {
+          "oldest_s": 57.3,
+          "unresolved": 120
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 72,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 280,
+          "pending": 120
+        }
+      }
+    },
+    {
+      "t": 81.1,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 58.3,
+          "unresolved": 73
+        },
+        "ws_verified": {
+          "oldest_s": 58.3,
+          "unresolved": 120
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 73,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 280,
+          "pending": 120
+        }
+      }
+    },
+    {
+      "t": 82.11,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 59.3,
+          "unresolved": 74
+        },
+        "ws_verified": {
+          "oldest_s": 59.3,
+          "unresolved": 120
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 17,
+          "pending": 74,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 280,
+          "pending": 120
+        }
+      }
+    },
+    {
+      "t": 83.12,
+      "phase": "outage",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 59.4,
+          "unresolved": 74
+        },
+        "ws_verified": {
+          "oldest_s": 60.3,
+          "unresolved": 118
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "pending": 74,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 282,
+          "pending": 118
+        }
+      }
+    },
+    {
+      "t": 84.15,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 60.4,
+          "unresolved": 75
+        },
+        "ws_verified": {
+          "oldest_s": 61.4,
+          "unresolved": 118
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "pending": 75,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 282,
+          "pending": 118
+        }
+      }
+    },
+    {
+      "t": 85.18,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 61.4,
+          "unresolved": 76
+        },
+        "ws_verified": {
+          "oldest_s": 62.4,
+          "unresolved": 118
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "pending": 76,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 282,
+          "pending": 118
+        }
+      }
+    },
+    {
+      "t": 86.22,
+      "phase": "recovery",
+      "jobs": {
+        "ws_unverified": {
+          "oldest_s": 62.5,
+          "unresolved": 77
+        },
+        "ws_verified": {
+          "oldest_s": 62.8,
+          "unresolved": 42
+        }
+      },
+      "media": {
+        "ws_unverified": {
+          "published": 18,
+          "pending": 77,
+          "blocked": 5
+        },
+        "ws_verified": {
+          "published": 360,
+          "pending": 40
+        }
+      }
+    },
+    {
+      "t": 87.24,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 77,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 88.25,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 78,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 89.26,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 79,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 90.27,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 80,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 91.28,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 81,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 92.29,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 82,
+          "blocked": 24
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 93.3,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 82,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 94.31,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 83,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 95.32,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 84,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 96.33,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 85,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 97.36,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 85,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    },
+    {
+      "t": 98.38,
+      "phase": "recovery",
+      "jobs": {},
+      "media": {
+        "ws_unverified": {
+          "published": 85,
+          "blocked": 25
+        },
+        "ws_verified": {
+          "published": 400
+        }
+      }
+    }
+  ]
+}

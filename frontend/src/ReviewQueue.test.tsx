@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import ReviewQueue from "./ReviewQueue";
+import ReviewQueue, { REFRESH_MS } from "./ReviewQueue";
 
 const admin = { userId: "admin_v", workspaceId: "ws_verified" };
 
@@ -48,6 +48,31 @@ describe("review queue states (incident bug 5)", () => {
     render(<ReviewQueue identity={admin} />);
     expect(await screen.findByRole("alert")).toHaveTextContent(/unexpected response/i);
     expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocument();
+  });
+
+  it("Refresh on an empty queue shows the failure when the API has gone down", async () => {
+    let calls = 0;
+    mockFetch(() => (++calls === 1 ? json(200, []) : Promise.reject(new TypeError("Failed to fetch"))));
+    render(<ReviewQueue identity={admin} />);
+    expect(await screen.findByText(/nothing to review/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /refresh/i }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(/unreachable/i);
+    expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocument();
+  });
+
+  it("a page left open notices the API going down on its own (auto-refresh)", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      let calls = 0;
+      mockFetch(() => (++calls === 1 ? json(200, []) : json(503, {})));
+      render(<ReviewQueue identity={admin} />);
+      expect(await screen.findByText(/nothing to review/i)).toBeInTheDocument();
+      await vi.advanceTimersByTimeAsync(REFRESH_MS);
+      expect(await screen.findByRole("alert")).toHaveTextContent(/HTTP 503/);
+      expect(screen.queryByText(/nothing to review/i)).not.toBeInTheDocument();
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("Retry reloads after a failure", async () => {

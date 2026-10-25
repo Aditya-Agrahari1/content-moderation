@@ -1,10 +1,10 @@
-﻿
+
  RUN  v2.1.8 C:/Users/agrah/OneDrive/Desktop/Content_moderation_v2/frontend
 
- ✓ src/ReviewQueue.test.tsx (8 tests) 239ms
+ ✓ src/ReviewQueue.test.tsx (10 tests) 428ms
 
  Test Files  1 passed (1)
-      Tests  8 passed (8)
-   Start at  00:40:17
-   Duration  21.30s (transform 152ms, setup 7.20s, collect 141ms, tests 239ms, environment 12.88s, prepare 458ms)
+      Tests  10 passed (10)
+   Start at  02:55:40
+   Duration  2.54s (transform 100ms, setup 401ms, collect 74ms, tests 428ms, environment 1.21s, prepare 130ms)
 

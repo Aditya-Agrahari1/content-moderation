@@ -160,15 +160,17 @@ def main() -> None:
     title("STEP 5  Bug 5: a failed review request is shown as a failure, never as an empty queue")
     subprocess.run([*COMPOSE, "stop", "api"], capture_output=True)
     print(f"  {RED}API stopped.{END}")
-    print(f"  {BOLD}>> In the browser: choose admin_v and click Retry (or refresh): 'the API is unreachable' + Retry.{END}")
+    print(f"  {BOLD}>> In the browser (admin_v): within 10 s the page shows 'Could not load the review queue: the API is"
+          f" unreachable' and a Retry button by itself (or click Refresh to see it at once).{END}")
     say("In the incident this looked like 'Nothing to review' while 40 items waited.")
+    say("Now a failure is always shown as a failure, and the page keeps re-checking every 10 seconds.")
     pause("Press Enter to start the API again...")
     subprocess.run([*COMPOSE, "start", "api"], capture_output=True)
     for _ in range(60):
         if call("GET", f"{API}/healthz")[0] == 200:
             break
         time.sleep(1)
-    print(f"  {GREEN}API back.{END}  >> Click Retry in the browser: the list loads again.")
+    print(f"  {GREEN}API back.{END}  >> In the browser click Retry (or wait 10 s): the queue loads again.")
     pause()
 
     title("STEP 6  Bug 4 and cost: each media item is scored once")

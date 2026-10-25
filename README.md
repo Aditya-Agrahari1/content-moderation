@@ -36,7 +36,7 @@ These use the test overrides, which set short timeouts so failures show up quick
 ```sh
 docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build
 docker compose exec api pytest                        # 171 backend tests (unit, SQL guard, integration, incident)
-cd frontend && npm ci && npx vitest run && cd ..      # 8 review-page tests
+cd frontend && npm ci && npx vitest run && cd ..      # 10 review-page tests
 docker compose exec api python scripts/workload.py --out evidence/after/workload.json [--video-frames 40]
 docker compose exec api python scripts/audit.py       # published-without-screening audit over the whole database
 python scripts/crash_test.py                          # host: real SIGKILL of the workers after the provider scored
@@ -173,7 +173,7 @@ Raw data: [`evidence/before/workload.json`](evidence/before/workload.json), [`ev
 **Other after-evidence:**
 - [`after/full_suite.txt`](evidence/after/full_suite.txt): 171 passed.
 - [`after/incident_tests.txt`](evidence/after/incident_tests.txt): 4 of 4 pass.
-- [`after/frontend_tests.txt`](evidence/after/frontend_tests.txt): 8 of 8 pass.
+- [`after/frontend_tests.txt`](evidence/after/frontend_tests.txt): 10 of 10 pass. That includes auto-refresh: a page left open notices the API going down within 10 s. This was added after a manual run of the demo showed a stale "Nothing to review" while the API was stopped.
 - [`after/audit.txt`](evidence/after/audit.txt): 923 published items in the whole database, 0 violations.
 - [`after/sample_trace.log`](evidence/after/sample_trace.log): one item through the whole recovery path: 5xx retries → open circuit (skip) → budget exhausted → probe re-queue (cycle 2) → doubled cooldown → canary success → published.
 

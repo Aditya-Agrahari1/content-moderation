@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 
 from app import db, log
 from app.config import PLACEHOLDER_SECRET, settings
-from app.routes import callback, media, review
+from app.routes import callback, media, ops, review
 
 
 @asynccontextmanager
@@ -31,6 +31,7 @@ app.add_middleware(
 app.include_router(media.router)
 app.include_router(review.router)
 app.include_router(callback.router)
+app.include_router(ops.router)
 
 
 @app.middleware("http")

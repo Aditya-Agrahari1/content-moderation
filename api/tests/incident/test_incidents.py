@@ -56,7 +56,8 @@ async def test_redelivery_while_running(api: Api, dbconn):
     The harness simulates redelivery by putting the SAME job row back to 'queued' while the original
     provider call is still in flight (slow mode). Only shared columns are touched.
     """
-    await api.set_mode("slow", delay_ms=3000)
+    # Slow, but below the 3 s client read timeout: the original call succeeds if left alone.
+    await api.set_mode("slow", delay_ms=1500)
     media_id = await api.upload_ok("member_v", image(explicit=0.01))
 
     async def in_flight() -> bool:
@@ -65,7 +66,10 @@ async def test_redelivery_while_running(api: Api, dbconn):
     assert await wait_for(in_flight, 10), "provider call never started"
     await dbconn.execute("UPDATE screening_jobs SET status = 'queued' WHERE media_id = $1::uuid", media_id)
 
-    assert await wait_for(lambda: _left_pending(api, "member_v", media_id), SETTLE_S)
+    async def decided() -> bool:
+        return await api.status("member_v", media_id) in ("published", "blocked")
+
+    assert await wait_for(decided, SETTLE_S)
     await wait_for(lambda: _calls_above(api, media_id, 1), 5)  # give a duplicate attempt time to show up
     assert await api.calls(media_id) == 1, "a redelivered job made a second concurrent provider call"
     assert await api.scored(media_id) == 1, "the media was scored more than once"

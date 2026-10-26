@@ -28,6 +28,7 @@ docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build --
 | `python scripts/show_db.py guard` | **The database refuses** to publish unchecked content, even when the app is bypassed | seconds |
 | `docker compose exec api pytest` | The full automated test suite: 172 tests | ~1.5 min |
 | `python scripts/crash_test.py` | Kills the workers at the worst moment, then shows recovery with no double charge | ~30 s |
+| http://localhost:8000/docs | **Try any API route by hand** in the browser (FastAPI's Swagger page). Fill in `x-user-id` / `x-workspace-id`, e.g. `member_u` / `ws_unverified`. The provider's page is http://localhost:8001/docs (switch modes with `/_control`). | — |
 
 **Saved results** from my own runs, before and after the fix, are in [`evidence/`](evidence/), so you can read them without running anything.
 
@@ -54,8 +55,8 @@ docker compose up --build
 
 | Service | Address | Notes |
 |---|---|---|
-| API | http://localhost:8000 | Callers identify themselves with `X-User-Id` / `X-Workspace-Id` headers |
-| Fake provider | http://localhost:8001 | `POST /_control`, `GET /_stats` |
+| API | http://localhost:8000 | Callers identify themselves with `X-User-Id` / `X-Workspace-Id` headers. Interactive docs: [/docs](http://localhost:8000/docs) |
+| Fake provider | http://localhost:8001 | `POST /_control`, `GET /_stats`. Interactive docs: [/docs](http://localhost:8001/docs) |
 | Review page | http://localhost:3000 | Pick an identity from the dropdown |
 
 The seed creates `ws_verified` (verified) with users `admin_v` and `member_v`, and `ws_unverified` (not verified) with users `admin_u` and `member_u`. The identity headers are a **test-harness mechanism, not authentication**.

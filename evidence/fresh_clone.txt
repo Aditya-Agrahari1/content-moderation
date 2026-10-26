@@ -1,40 +1,20 @@
-# Fresh clone check: git clone + 'docker compose up -d --build' (default compose file, no overrides)
-# 2026-10-26T00:46:37+05:30  commit 8a78f6f
- Container content-moderation-api-1  Starting
- Container content-moderation-api-1  Started
- Container content-moderation-api-1  Waiting
- Container content-moderation-api-1  Waiting
- Container content-moderation-api-1  Healthy
- Container content-moderation-frontend-1  Starting
- Container content-moderation-api-1  Healthy
- Container content-moderation-worker-2  Starting
- Container content-moderation-worker-2  Started
- Container content-moderation-worker-1  Starting
- Container content-moderation-frontend-1  Started
- Container content-moderation-worker-1  Started
-api health: healthy
+# Fresh clone check: git clone + 'docker compose up -d --build --wait' (default compose file, no overrides)
+# 2026-10-26T14:01:24+05:30  commit 053619a
+compose up exit: 0
 content-moderation-api-1  Up 7 seconds (healthy)
-content-moderation-db-1  Up 14 seconds (healthy)
+content-moderation-db-1  Up 13 seconds (healthy)
 content-moderation-frontend-1  Up 1 second
 content-moderation-provider-1  Up 13 seconds (healthy)
-content-moderation-redis-1  Up 14 seconds (healthy)
+content-moderation-redis-1  Up 13 seconds (healthy)
 content-moderation-worker-1  Up 1 second
 content-moderation-worker-2  Up 1 second
---- smoke checks against the default stack (provider timeouts 2s/10s, lease 30s) ---
-frontend GET /           -> 200
-POST /media (explicit last frame, unverified) -> {"id":"02156e3e-3bbe-413f-80e0-c1bc87306ed0","status":"pending"}
-POST /media (16-year-old prompt) -> 422 {"reasons":["prompt_minor"]}
-GET /media (owner)       -> {"id":"02156e3e-3bbe-413f-80e0-c1bc87306ed0","status":"blocked","reasons":["explicit_unverified"]}
-GET /media (other ws)    -> 404
-GET /review (admin_v)    -> [(True, 'needs_human_review', True)]
-approve by member        -> 403
-approve by admin         -> {"id":"e36a3123-18ca-4706-8f4e-629eb10d7a60","status":"published"}
-unsigned callback        -> 401
-provider /_control fail  -> {"mode":"error","delay_ms":3000}
-during outage            -> {"id":"77fa9c0b-c9ae-44dd-a47f-e022c272c0fc","status":"held","reasons":["provider_unavailable"]}
-after recovery (2s)    -> {"id":"77fa9c0b-c9ae-44dd-a47f-e022c272c0fc","status":"published","reasons":[]}
-provider /_stats         -> {'02156e3e-3bbe-413f-80e0-c1bc87306ed0': 1, 'e36a3123-18ca-4706-8f4e-629eb10d7a60': 1, '77fa9c0b-c9ae-44dd-a47f-e022c272c0fc': 3}
---- full test suite in the fresh clone (docker-compose.test.yml overrides) ---
-........................................................................ [ 84%]
-...........................                                              [100%]
-171 passed in 77.31s (0:01:17)
+--- smoke checks against the default stack ---
+review page GET /       -> 200
+explicit last frame, unverified -> {"id":"e96e7a22-3550-4f77-b2c3-3d3749fb1aea","status":"blocked","reasons":["explicit_unverified"]}
+16-year-old prompt -> {"reasons":["prompt_minor"]}
+other workspace GET -> 404
+unsigned callback   -> 401
+--- full backend suite in the fresh clone (docker-compose.test.yml overrides) ---
+171 passed in 79.70s (0:01:19)
+--- frontend tests in the fresh clone ---
+      Tests  10 passed (10)

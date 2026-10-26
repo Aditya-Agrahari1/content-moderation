@@ -1,20 +1,21 @@
 # Fresh clone check: git clone + 'docker compose up -d --build --wait' (default compose file, no overrides)
-# 2026-10-26T14:01:24+05:30  commit 053619a
+# 2026-10-26T18:00:23+05:30  commit 38cc837
 compose up exit: 0
-content-moderation-api-1  Up 7 seconds (healthy)
-content-moderation-db-1  Up 13 seconds (healthy)
+content-moderation-api-1  Up 8 seconds (healthy)
+content-moderation-db-1  Up 14 seconds (healthy)
 content-moderation-frontend-1  Up 1 second
-content-moderation-provider-1  Up 13 seconds (healthy)
-content-moderation-redis-1  Up 13 seconds (healthy)
+content-moderation-provider-1  Up 14 seconds (healthy)
+content-moderation-redis-1  Up 14 seconds (healthy)
 content-moderation-worker-1  Up 1 second
 content-moderation-worker-2  Up 1 second
 --- smoke checks against the default stack ---
 review page GET /       -> 200
-explicit last frame, unverified -> {"id":"e96e7a22-3550-4f77-b2c3-3d3749fb1aea","status":"blocked","reasons":["explicit_unverified"]}
-16-year-old prompt -> {"reasons":["prompt_minor"]}
+explicit last frame, unverified -> {"id":"ae14eacd-cf2e-472f-896b-447a939f370f","status":"blocked","reasons":["explicit_unverified"]}
+16-year-old prompt  -> {"reasons":["prompt_minor"]}
 other workspace GET -> 404
+mismatched identity GET -> 404
 unsigned callback   -> 401
---- full backend suite in the fresh clone (docker-compose.test.yml overrides) ---
-171 passed in 79.70s (0:01:19)
---- frontend tests in the fresh clone ---
-      Tests  10 passed (10)
+--- with docker-compose.test.yml overrides ---
+check_all: 31 / 31 checks passed
+backend:   172 passed in 81.45s (0:01:21)
+frontend:        Tests  10 passed (10)

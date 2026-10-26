@@ -158,6 +158,12 @@ def main() -> None:
     pause()
 
     title("STEP 5  Bug 5: a failed review request is shown as a failure, never as an empty queue")
+    waiting = upload("member_v", {"type": "image", "source": "upload", "frames": [{"minor": 0.6}]})
+    ids.append(waiting)
+    wait_status("member_v", waiting, ("held",))
+    print(f"  {BOLD}>> In the browser (admin_v): click Refresh. The queue shows this item ({waiting[:8]}..., minor_review)."
+          f"{END}")
+    pause("Press Enter to STOP the API...")
     subprocess.run([*COMPOSE, "stop", "api"], capture_output=True)
     print(f"  {RED}API stopped.{END}")
     print(f"  {BOLD}>> In the browser (admin_v): within 10 s the page shows 'Could not load the review queue: the API is"
@@ -170,7 +176,8 @@ def main() -> None:
         if call("GET", f"{API}/healthz")[0] == 200:
             break
         time.sleep(1)
-    print(f"  {GREEN}API back.{END}  >> In the browser click Retry (or wait 10 s): the queue loads again.")
+    print(f"  {GREEN}API back.{END}  >> In the browser click Retry (or wait 10 s): the item {waiting[:8]}... is back"
+          f" in the queue. Nothing was lost; the page just could not reach the API.")
     pause()
 
     title("STEP 6  Bug 4 and cost: each media item is scored once")

@@ -23,10 +23,12 @@ import uuid
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from typing import Literal
 
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 
 LABELS = ("minor", "sexual_violence", "bestiality", "self_harm", "real_person", "explicit")
 MODES = {"ok": "ok", "slow": "slow", "timeout": "timeout", "error": "error", "fail": "error"}
@@ -177,18 +179,30 @@ async def score(request: Request) -> JSONResponse:
     return respond(media_id, result)
 
 
-@app.post("/_control")
+class ControlIn(BaseModel):
+    """Body of POST /_control. Only *described* to OpenAPI (so /docs shows a body to fill in); the
+    handler parses the raw bytes itself, so callers that omit Content-Type: application/json still work."""
+
+    model_config = {"json_schema_extra": {"examples": [{"mode": "timeout"}, {"mode": "slow", "delay_ms": 3000}]}}
+
+    mode: Literal["ok", "slow", "timeout", "error", "fail"]
+    delay_ms: int | None = Field(default=None, ge=0, strict=True, description="slow mode only")
+
+
+CONTROL_OPENAPI = {"requestBody": {"required": True,
+                                   "content": {"application/json": {"schema": ControlIn.model_json_schema()}}}}
+
+
+@app.post("/_control", openapi_extra=CONTROL_OPENAPI)
 async def control(request: Request) -> JSONResponse:
     try:
-        body = await request.json()
-        mode = MODES[body["mode"]]
-        delay_ms = body.get("delay_ms")
-        if delay_ms is not None and (not isinstance(delay_ms, int) or isinstance(delay_ms, bool) or delay_ms < 0):
-            raise ValueError
-    except (ValueError, KeyError, TypeError):
+        body = ControlIn.model_validate_json(await request.body())
+    except ValueError:
         return JSONResponse(
             status_code=422, content={"error": "mode must be one of ok, slow, timeout, error (alias: fail)"}
         )
+    mode = MODES[body.mode]
+    delay_ms = body.delay_ms
     state.mode = mode
     state.delay_ms = delay_ms if delay_ms is not None else DEFAULT_SLOW_DELAY_MS
     emit("mode_changed", mode=mode, delay_ms=state.delay_ms)

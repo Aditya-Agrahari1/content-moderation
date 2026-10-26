@@ -1,0 +1,2 @@
+# Same line endings for everyone (shell scripts break with CRLF), whatever the OS or git settings.
+* text=auto eol=lf

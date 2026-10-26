@@ -5,7 +5,14 @@ This is a FastAPI + PostgreSQL + Redis service, with a React/TypeScript review p
 - nothing explicit reaches an unverified workspace;
 - nothing goes live unchecked, even when the provider is slow, down, or answers twice.
 
-The repository first reproduces last Tuesday's incident with a deliberately broken handler (tag **`broken-baseline`**), and then fixes it in separate commits. Every number below comes from a file in [`evidence/`](evidence/).
+The repository first reproduces last Tuesday's incident with a deliberately broken handler (tag **`broken-baseline`**), and then fixes it in separate commits. Every measured number below comes from a file in [`evidence/`](evidence/). The Part 3 cost figures are estimates and are labelled as such.
+
+**In short:**
+- All five incident bugs were reproduced first. At `broken-baseline`, 4 of 4 incident tests and 8 of 10 review-page tests fail.
+- They are fixed one commit at a time. Now 171 backend tests and 10 review-page tests pass.
+- Under the same workload with a 60 s provider outage, **media published unchecked went from 126 to 0**, prohibited prompts accepted from 5 to 0, and provider calls per upload from 1.16 to 1.02 (each item scored exactly once).
+- A real `kill -9` of the workers after the provider scored publishes nothing and recovers without a second scoring.
+- To check it yourself: start the stack (below), then run `python scripts/check_all.py`. It tests each rule live and prints expected, actual, proof and PASS/FAIL.
 
 ## Quick start
 
@@ -21,6 +28,17 @@ docker compose up --build
 
 The seed creates `ws_verified` (verified) with users `admin_v` and `member_v`, and `ws_unverified` (not verified) with users `admin_u` and `member_u`. The identity headers are a **test-harness mechanism, not authentication**.
 
+**Ports 8000, 8001 and 3000 must be free.** On Windows, Docker binds IPv6 `::` while another process can still hold IPv4 `0.0.0.0:8000`. A browser then silently falls back to that other server when the API is down; this happened during manual testing here. Check with `netstat -ano | findstr :8000`.
+
+| Route (contract) | Who | Returns |
+|---|---|---|
+| `POST /media` | any member | `202 {"id","status":"pending"}`; `422 {"reasons"}` for a refused prompt or invalid input |
+| `GET /media/{id}` | members of the owning workspace | `200 {"id","status","reasons"}`; `404` for anyone else; `401` with no identity |
+| `GET /review` | admins | `200` list of the workspace's held media (`hold_reason`, `reviewable`) |
+| `POST /review/{id}/approve` · `/reject` | admins | `200`; `403` for members; `409` if not held (or `not_screened` on approve) |
+| `POST /provider/callback` | provider | `200`; `401` without a valid `X-Signature` (hex HMAC-SHA256 of the raw body) |
+| provider `POST /_control` · `GET /_stats` | checks | modes `ok`·`slow`·`timeout`·`error` (alias `fail`); `{"calls":{…},"scored":{…},"callback_sends":{…}}` |
+
 ```sh
 curl -s -X POST localhost:8000/media -H 'X-User-Id: member_u' -H 'X-Workspace-Id: ws_unverified' \
   -H 'Content-Type: application/json' \
@@ -34,13 +52,16 @@ curl -s -X POST localhost:8001/_control -d '{"mode":"timeout"}'   # ok | slow | 
 These use the test overrides, which set short timeouts so failures show up quickly. `make` is optional; every command is shown in full.
 
 ```sh
-docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build
+docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build --wait
+python scripts/check_all.py                           # every rule, live: did / expected / actual / proof / PASS
 docker compose exec api pytest                        # 171 backend tests (unit, SQL guard, integration, incident)
 cd frontend && npm ci && npx vitest run && cd ..      # 10 review-page tests
 docker compose exec api python scripts/workload.py --out evidence/after/workload.json [--video-frames 40]
 docker compose exec api python scripts/audit.py       # published-without-screening audit over the whole database
 python scripts/crash_test.py                          # host: real SIGKILL of the workers after the provider scored
 sh scripts/trace_outage.sh                            # one media item through an outage, grepped across all logs
+python scripts/show_db.py [<media id> | guard]        # what PostgreSQL stored; 'guard' shows the trigger refusing
+python scripts/demo.py                                # guided live demo, step by step, with the review page
 ```
 
 **Reproducing a baseline bug.** The whole incident suite fails on the baseline:
@@ -48,8 +69,9 @@ sh scripts/trace_outage.sh                            # one media item through a
 ```sh
 docker compose down -v
 git worktree add ../baseline broken-baseline && cd ../baseline
-docker compose -p baseline -f docker-compose.yml -f docker-compose.test.yml up -d --build
-docker compose -p baseline exec api pytest tests/incident -v
+docker compose -p baseline -f docker-compose.yml -f docker-compose.test.yml up -d --build --wait
+docker compose -p baseline exec api pytest tests/incident -v     # 4 FAILED, each with the incident symptom
+docker compose -p baseline down -v && cd -                        # then restart the fixed stack
 ```
 
 ## 1. The incident: failure → cause → evidence
@@ -67,11 +89,11 @@ docker compose -p baseline exec api pytest tests/incident -v
 2. while calls hung, the short redelivery timer started second and third calls (bug 4);
 3. the review page hid its own errors (bug 5).
 
-Bugs 2 and 3 were independent gaps that the outage exposed.
+Bugs 2 and 3 were independent gaps that showed up in the same incident.
 
 **Baseline evidence files:**
 - [`evidence/before/incident_tests.txt`](evidence/before/incident_tests.txt) and [`frontend_tests.txt`](evidence/before/frontend_tests.txt): captured at the tag.
-- [`evidence/before/incident_tests_final.txt`](evidence/before/incident_tests_final.txt) and [`frontend_tests_final.txt`](evidence/before/frontend_tests_final.txt): the *final* test files re-run against the baseline application code, because one incident test was corrected after the tag (see [AI.md](AI.md) #9). Result: 4 of 4 incident tests fail, and 6 of 8 frontend tests fail. Four of those six are bug-5 state tests; two test features added in the fix.
+- [`evidence/before/incident_tests_final.txt`](evidence/before/incident_tests_final.txt) and [`frontend_tests_final.txt`](evidence/before/frontend_tests_final.txt): the *final* test files re-run against the baseline application code, because one incident test was corrected after the tag (see [AI.md](AI.md) #9). Result: 4 of 4 incident tests fail, and 8 of 10 frontend tests fail. Six of those eight are bug-5 tests (an error shown as an empty queue; no recovery from a failure); two test features added in the fix (`reviewable`, action errors).
 
 **A finished job is not proof of screening.** The incident tests and the audit look at media status and the provider's own evidence (`/_stats`, `screening_results`). They never look at job status.
 
@@ -162,11 +184,12 @@ Raw data: [`evidence/before/workload.json`](evidence/before/workload.json), [`ev
 | Backlog drained after the provider recovered | 3.1 s | 11.1 s |
 | B images: time to leave `pending` during the outage (p50 / p95) | 41.7 s / 63.5 s (left as `published`!) | **0.9 s / 3.0 s** (`held`) |
 | A videos: time to leave `pending` during the outage (p95) | 63.7 s | 8.2 s |
+| B images uploaded **after** recovery while A's backlog drained: time to decision (p50 / p95) | 0.5 s / 1.6 s | 1.7 s / 7.8 s |
 
 **How to read this table:**
 - **The baseline's quick drain isn't a good sign.** It "finished" the backlog by publishing it. After the fix, the backlog is held and then genuinely screened: the drain takes about 11 s, which includes up to 8 s for the breaker to notice the provider is back.
 - **"Oldest unresolved job" tracks the outage in both versions** (about 60 s for a 60 s outage). The metric counts every unresolved state (`queued`, `claimed`, `waiting_callback`, `held_provider`), so it does not hide outage-held jobs.
-- **The burst doesn't starve the other workspace.** During the outage, B's images reach `held` in 3 s (p95) while A's 200 videos are in the queue. After recovery, B's new images are decided within 7.8 s (p95), mostly breaker recovery lag.
+- **The burst doesn't starve the other workspace.** No system can *screen* anything while the provider is down; fairness then means B's media is handled promptly and safely. During the outage, B's images reach `held` in 3 s (p95) while A's 200 videos are in the queue. After recovery, B's new images are decided within 7.8 s (p95) while A's backlog is still draining. Most of that is breaker recovery lag: the first seconds after the outage, before the canary call succeeds. The baseline looks faster here only because it had already published its backlog unscreened.
 - **Calls per upload fell, even with retries**, because the circuit breaker skips calls during the outage and nothing is redelivered while a call is running. Every failed call is counted honestly in `/_stats.calls`.
 - **Scope of these numbers:** one laptop, Docker Desktop, test timeouts, a 60-second outage. They show the behaviour; they are not capacity numbers.
 
@@ -209,6 +232,17 @@ A database lock alone can't settle this, because the uncertainty is on the provi
 
 ## 5. Remaining limits (what is not done or not proven)
 
+**What remains broken:** nothing known within the required scope. Every rule, route and failure mode in the assignment has a passing test, and the workload audit reports zero violations.
+
+**Why some things were left out:** the time went to what the assessment weights most:
+- the rules holding under provider failures;
+- recovery and duplicate-work evidence;
+- honest before/after measurements.
+
+That came ahead of type-checking, CI wiring and UI polish. The review page is deliberately plain.
+
+**Late change:** the review page's auto-refresh (§3) was added after the main evidence run, when a manual demo showed a stale "Nothing to review" while the API was stopped. It is covered by two new tests and the re-run frontend evidence.
+
 - **Prompt screening is a keyword-and-normalization first layer.** It has false positives (it conservatively refuses any mention of minors) and misses euphemisms and indirect references. See Part 3.
 - **No durable callback inbox, no replay nonce.** The callback contract has no timestamp or nonce header. A replayed valid body can only repeat a decision that already exists, because callbacks are idempotent and never undo a decision. Provider retries plus the watchdog cover lost callbacks.
 - **The workspace cap is static and not work-conserving** (DECISIONS.md, ADR-5).
@@ -249,7 +283,7 @@ Any disagreement in the 0.5–0.8 band goes to human review. Explicit content is
 | Rekognition image moderation, images | 10,000 × $0.001 ([pricing](https://aws.amazon.com/rekognition/pricing/), first 1M images) | $10 |
 | Rekognition moderation, video frames as images | 60,000 frames × $0.001 | $60 |
 | *Alternative: Rekognition stored-video moderation* | 1,000 min × $0.10/min (same page) | *$100* |
-| Celebrity recognition, images and frames | 70,000 × $0.001 (Group 2 rate) | $70 |
+| Celebrity recognition, images and frames | 70,000 × $0.001 (*assumed* same per-image tier as moderation; not confirmed on the page) | $70 |
 | Self-hosted minor, bestiality and sexual-violence models | About 70k inferences, roughly 1 GPU-hour of compute; an always-on L4/T4 instance is ~$0.5–0.8/h, or $400–600/month always-on, much less if batch or serverless (illustrative, not quoted) | $50–600 |
 | CSAM hash matching | PhotoDNA / Thorn Safer: no-cost or contract for qualifying platforms; quote needed | — |
 | Google SafeSearch, for comparison | 70,000 units × $1.50 per 1,000 ([pricing](https://cloud.google.com/vision/pricing), units 1k–5M) | $105 |
@@ -285,7 +319,10 @@ Keyword lists alone fail because adversaries invent new euphemisms faster than a
 
 ### At 1 million uploads a day, what breaks first?
 
-**Load:** 1M a day averages about 11.6 uploads per second; assume peaks of 5–10×, so roughly 60–120 per second. With videos at 60 frames each, that's 10⁵–10⁶ frames per second into the classifiers at peak.
+**Load:**
+- 1M a day averages about 11.6 uploads per second; assume peaks of 5–10×, so roughly 60–120 per second.
+- In the worst case, where every upload is a one-minute video scored at 1 fps (60 frames), that's about **3,600–7,200 frames per second** into the classifiers at peak, or about 60M frames a day.
+- With a realistic image-heavy mix it is much lower. Frame volume, not upload count, sizes the classifier fleet.
 
 **What breaks first, in order:**
 1. **Provider throughput and rate limits.** At that volume the paid API's per-second quota and our GPU capacity bind before the database does. You'd see a rising 429 rate, the circuit breaker opening, and the oldest unresolved job growing.
@@ -328,10 +365,12 @@ Keyword lists alone fail because adversaries invent new euphemisms faster than a
 
 ## 8. Time spent and AI use
 
-- **Time:** about 2 h 45 min of implementation, from 22:10 to 00:55 IST.
-  - That includes about 45 minutes waiting on slow Docker Hub base-image downloads at setup.
-  - Writing and reviewing the plan beforehand isn't included; `PLAN.md` is in the repo.
-- **Fresh-clone check:** [`evidence/fresh_clone.txt`](evidence/fresh_clone.txt). A clean `git clone` plus `docker compose up -d --build` with the default compose file started all 7 containers. The contract smoke checks passed, the review page returned 200, and the full suite in that clone passed (171).
+- **Time:** about 5 h 30 min in total, from the commit timestamps. That's within the 6–7 h allowed.
+  - **Implementation and evidence:** 22:10–00:55 IST (2 h 45 min). That includes about 45 minutes waiting on slow Docker Hub base-image downloads at setup.
+  - **Demo, checklist and database tooling, plus the review-page auto-refresh fix found while demoing:** 00:55–03:00 IST (about 2 h).
+  - **Final documentation review:** about 45 min the next day. One error was corrected there: the Part 3 frames-per-second figure, see AI.md.
+  - **Not included:** writing and reviewing the plan beforehand. `PLAN.md` is in the repo.
+- **Fresh-clone check:** [`evidence/fresh_clone.txt`](evidence/fresh_clone.txt), re-run on the final commit. A clean `git clone` plus `docker compose up -d --build` with the default compose file started all 7 containers. The contract smoke checks passed, the review page returned 200, and the full backend suite in that clone passed.
 - **AI use:** see [AI.md](AI.md) for tools, what was checked, the incorrect suggestions that were caught, and what isn't verified.
 - **Design decisions:** [DECISIONS.md](DECISIONS.md).
 - **Plan versus implementation:** [PLAN.md](PLAN.md) was the plan. Deviations:

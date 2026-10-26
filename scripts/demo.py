@@ -44,7 +44,7 @@ def title(text: str) -> None:
 
 
 def say(text: str) -> None:
-    print(f"{YELLOW}  Say: {text}{END}")
+    print(f"{YELLOW}  {text}{END}")
 
 
 def show(label: str, status: int, body) -> None:

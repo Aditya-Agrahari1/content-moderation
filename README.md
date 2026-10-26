@@ -396,10 +396,10 @@ Keyword lists alone fail because adversaries invent new euphemisms faster than a
 
 ## 8. Time spent and AI use
 
-- **Time:** about 5 h 30 min in total, from the commit timestamps. That's within the 6–7 h allowed.
+- **Time:** about 6 h 30 min in total. That's within the 6–7 h allowed.
   - **Implementation and evidence:** 22:10–00:55 IST (2 h 45 min). That includes about 45 minutes waiting on slow Docker Hub base-image downloads at setup.
   - **Demo, checklist and database tooling, plus the review-page auto-refresh fix found while demoing:** 00:55–03:00 IST (about 2 h).
-  - **Final documentation review:** about 45 min the next day. One error was corrected there: the Part 3 frames-per-second figure, see AI.md.
+  - **Final review and submission prep the next day:** about 1 h 45 min. This covered checking the docs against the assignment (one error was corrected: the Part 3 frames-per-second figure, see AI.md), re-running the baseline and fresh-clone checks, a pre-submission cleanup and this reviewer guide.
   - **Not included:** writing and reviewing the plan beforehand. `PLAN.md` is in the repo.
 - **Fresh-clone check:** [`evidence/fresh_clone.txt`](evidence/fresh_clone.txt), re-run on the final commit. A clean `git clone` plus `docker compose up -d --build` with the default compose file started all 7 containers. The contract smoke checks passed, the review page returned 200, and the full backend suite in that clone passed.
 - **AI use:** see [AI.md](AI.md) for tools, what was checked, the incorrect suggestions that were caught, and what isn't verified.

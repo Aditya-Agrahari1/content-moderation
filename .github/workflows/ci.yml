@@ -34,6 +34,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build --wait db redis provider api
+      - name: start stack (debug)
+        run: |
+          set +e
+          C="docker compose -f docker-compose.yml -f docker-compose.test.yml"
+          docker compose version
+          $C up -d --build --wait db redis provider api > up.log 2>&1; rc=$?
+          if [ $rc -ne 0 ]; then
+            { echo "rc=$rc"; tail -25 up.log; $C ps -a; $C logs --tail 30 api provider db redis; } > dbg.txt 2>&1
+            msg=$(tail -90 dbg.txt | tr -d '\r' | sed -e ':a' -e 'N' -e '$!ba' -e 's/%/%25/g' -e 's/\n/%0A/g')
+            echo "::error title=stack-debug::$msg"
+          fi
+          exit $rc
       - run: docker compose -f docker-compose.yml -f docker-compose.test.yml up -d worker
       - run: docker compose -f docker-compose.yml -f docker-compose.test.yml exec -T api pytest

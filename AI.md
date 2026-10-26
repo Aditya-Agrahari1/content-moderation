@@ -2,11 +2,14 @@
 
 ## Tools
 
+- **ChatGPT**, before implementation:
+  - to understand the assignment;
+  - to help draft my planning notes and the first draft of the implementation plan.
 - **Claude Code (Claude Opus 5.5)**, running in VS Code on Windows, used for:
-  - reviewing and revising my implementation plan (`PLAN.md`)
-  - writing the code, tests, scripts and docs
-  - running Docker, tests and the workload
-- No other code-generation tools were used.
+  - reviewing and revising that plan (`PLAN.md`, Revision 2);
+  - writing all of the code, tests, scripts and docs in this repository;
+  - running Docker, tests and the workload.
+- I reviewed the plan, ran the demo and the checks by hand, and found two of the issues below myself.
 
 ## How work was checked
 

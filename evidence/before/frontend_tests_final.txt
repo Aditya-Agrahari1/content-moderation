@@ -1,6 +1,6 @@
 # Final frontend tests (src/ReviewQueue.test.tsx at main, 10 tests) run against broken-baseline UI code
 
- RUN  v2.1.8 C:/Users/agrah/OneDrive/Desktop/cm_base_fe/frontend
+ RUN  v2.1.8 <repo>/frontend
 
  ❯ src/ReviewQueue.test.tsx (10 tests | 8 failed) 5808ms
    × review queue states (incident bug 5) > an HTTP 500 is shown as a failure with Retry, never as 'Nothing to review' 1023ms
@@ -369,3 +369,5 @@ Received:
    Start at  13:58:50
    Duration  10.16s (transform 148ms, setup 638ms, collect 87ms, tests 5.81s, environment 2.85s, prepare 227ms)
 
+
+(Local file paths in the test-runner header were replaced with <repo> before submission; nothing else was changed.)

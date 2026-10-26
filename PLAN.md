@@ -1,6 +1,6 @@
 # PLAN.md — Content Moderation Service (Revision 2)
 
-> **Status:** Planning only. No application code, implementation files, or repository scaffolding until the user explicitly says **"go"**.
+> **Status:** Design plan written and reviewed before implementation; kept as the record of what was planned. Where the build differs, README §8 lists the deviations.
 >
 > **Scope rule:** This document is the implementation contract. If implementation reveals a conflict, stop, update this plan and its tests, then continue. Do not code around the plan.
 >
@@ -905,8 +905,7 @@ Everything is real command output. Nothing is edited by hand.
   - DECISIONS.md holds the ADRs.
   - docs/WALKTHROUGH.md is interview preparation, written last.
 - **Private files and the docs folder:**
-  - **Before `git init`:** move `Docs/BRIEF.md`, `Docs/TASK.md` and `Docs/assignment.txt` out of the repository (with the user's confirmation), and move this plan to `./PLAN.md`. `Docs/` and `docs/` are the same folder on Windows.
-  - **Ignore list:** `.gitignore` also lists the three files as a safeguard.
+  - **Before `git init`:** keep private working notes outside the repository, and move this plan to `./PLAN.md`. `Docs/` and `docs/` are the same folder on Windows.
 
 ---
 
@@ -1020,4 +1019,4 @@ These are never cut:
 
 ---
 
-**STOP: waiting for an explicit "go" before any application code is written.**
+*End of plan. Implementation followed in the commit history, starting at "Scaffold: compose stack, fake provider, naive schema and seed".*

@@ -1,5 +1,5 @@
 ﻿
- RUN  v2.1.8 C:/Users/agrah/OneDrive/Desktop/Content_moderation_v2/frontend
+ RUN  v2.1.8 <repo>/frontend
 
  ❯ src/ReviewQueue.test.tsx (4 tests | 2 failed) 2083ms
    × review queue states (incident bug 5) > an HTTP 500 is shown as a failure with Retry, never as 'Nothing to review' 1016ms
@@ -122,3 +122,5 @@ Ignored nodes: comments, script, style
    Start at  23:14:02
    Duration  4.78s (transform 119ms, setup 569ms, collect 83ms, tests 2.08s, environment 1.56s, prepare 145ms)
 
+
+(Local file paths in the test-runner header were replaced with <repo> before submission; nothing else was changed.)

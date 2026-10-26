@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 
 from app import db, log, wakeup
-from app.auth import Caller, get_caller
+from app.auth import Caller, get_caller, lookup_caller
 from app.prompt_screen import screen_prompt
 from app.schemas import MediaAccepted, MediaIn, MediaOut
 
@@ -46,7 +46,10 @@ async def create_media(body: MediaIn, caller: Caller = Depends(get_caller)):
 
 
 @router.get("/media/{media_id}", response_model=MediaOut)
-async def get_media(media_id: str, caller: Caller = Depends(get_caller)):
+async def get_media(media_id: str, caller: Caller | None = Depends(lookup_caller)):
+    # Contract: members of the owning workspace get 200, anyone else 404 (unknown identities included).
+    if caller is None:
+        raise HTTPException(status_code=404, detail="Not found")
     row = await db.pool().fetchrow(
         "SELECT id, status, reasons FROM media WHERE id = $1 AND workspace_id = $2",
         parse_media_id(media_id), caller.workspace_id,

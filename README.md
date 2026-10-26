@@ -13,22 +13,23 @@ The repository first reproduces last Tuesday's incident with a deliberately brok
 
 Run these from the repository folder. Use `python3` on macOS/Linux.
 
-**1. Start it** (about 2 minutes the first time)
+**1. Start it** (about 3–5 minutes the first time, while Docker downloads about 400 MB; seconds after that)
 ```sh
 docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build --wait
 ```
 
-**2. Check every rule live** (about 1 minute)
-```sh
-python scripts/check_all.py
-```
-→ it prints each rule with *did / expected / actual / proof* and ends with `30 / 30 checks passed`.
+**2. Check it.** Pick any of these:
 
-**3. Watch an outage and recovery** (optional, about 3 minutes, guided)
-```sh
-python scripts/demo.py
-```
-→ open http://localhost:3000 next to it; press Enter between steps.
+| Command | What it shows | Time |
+|---|---|---|
+| `python scripts/check_all.py` | **Every rule, tested live:** did / expected / actual / proof for each, ending with `31 / 31 checks passed` | ~1 min |
+| `python scripts/demo.py` | **Guided live demo** with the review page (open http://localhost:3000): late frame, refused prompt, outage → held → automatic recovery, review-page errors. Press Enter between steps. | ~5 min |
+| `python scripts/show_db.py` | **Database proof:** the latest items, and "every published item has a complete check" | seconds |
+| `python scripts/show_db.py guard` | **The database refuses** to publish unchecked content, even when the app is bypassed | seconds |
+| `docker compose exec api pytest` | The full automated test suite: 172 tests | ~1.5 min |
+| `python scripts/crash_test.py` | Kills the workers at the worst moment, then shows recovery with no double charge | ~30 s |
+
+**Saved results** from my own runs, before and after the fix, are in [`evidence/`](evidence/), so you can read them without running anything.
 
 | Incident bug | Before (`broken-baseline`) | Now |
 |---|---|---|
@@ -39,7 +40,7 @@ python scripts/demo.py
 | 5. Failed review request shown as "Nothing to review" | empty list | error + Retry, page re-checks every 10 s |
 | **Same workload, 60 s provider outage** | **126 published unchecked** | **0** (calls per upload 1.16 → 1.02) |
 
-Tests: 4 of 4 incident tests fail at `broken-baseline` and pass now. 171 backend and 10 review-page tests pass, including in a fresh clone.
+Tests: 4 of 4 incident tests fail at `broken-baseline` and pass now. 172 backend and 10 review-page tests pass, including in a fresh copy of this submission.
 
 **More detail:** [the fix](#2-the-fix) · [before/after numbers](#3-before-and-after-same-workload-measured) · [crash test](#4-worker-crash-after-the-provider-scored-before-the-result-was-saved) · [limits](#5-remaining-limits-what-is-not-done-or-not-proven) · [Part 3 answers](#6-part-3-cost-and-the-next-limit) · [production plan](#7-production-plan) · [AI.md](AI.md) · [DECISIONS.md](DECISIONS.md)
 
@@ -64,7 +65,7 @@ The seed creates `ws_verified` (verified) with users `admin_v` and `member_v`, a
 | Route (contract) | Who | Returns |
 |---|---|---|
 | `POST /media` | any member | `202 {"id","status":"pending"}`; `422 {"reasons"}` for a refused prompt or invalid input |
-| `GET /media/{id}` | members of the owning workspace | `200 {"id","status","reasons"}`; `404` for anyone else; `401` with no identity |
+| `GET /media/{id}` | members of the owning workspace | `200 {"id","status","reasons"}`; `404` for anyone else, including unknown or mismatched identities; `401` only when the identity headers are missing |
 | `GET /review` | admins | `200` list of the workspace's held media (`hold_reason`, `reviewable`) |
 | `POST /review/{id}/approve` · `/reject` | admins | `200`; `403` for members; `409` if not held (or `not_screened` on approve) |
 | `POST /provider/callback` | provider | `200`; `401` without a valid `X-Signature` (hex HMAC-SHA256 of the raw body) |
@@ -85,7 +86,7 @@ These use the test overrides, which set short timeouts so failures show up quick
 ```sh
 docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build --wait
 python scripts/check_all.py                           # every rule, live: did / expected / actual / proof / PASS
-docker compose exec api pytest                        # 171 backend tests (unit, SQL guard, integration, incident)
+docker compose exec api pytest                        # 172 backend tests (unit, SQL guard, integration, incident)
 cd frontend && npm ci && npx vitest run && cd ..      # 10 review-page tests
 docker compose exec api python scripts/workload.py --out evidence/after/workload.json [--video-frames 40]
 docker compose exec api python scripts/audit.py       # published-without-screening audit over the whole database
@@ -166,7 +167,8 @@ PostgreSQL guard trigger: no 'published' without a full-coverage result, or an a
 
 **Isolation.**
 - Every media and review query is filtered by the caller's workspace, so other workspaces get `404`.
-- Missing headers return `401` and a wrong identity returns `403`, both decided *before* any lookup.
+- Missing headers return `401`, decided before any lookup.
+- An unknown or mismatched identity gets `404` on `GET /media/{id}`, as the contract says ("404 for anyone else"), and `403` on the other routes.
 - Composite foreign keys tie users, jobs and reviews to their workspace.
 
 ### Retry policy (per recovery cycle)
@@ -225,7 +227,7 @@ Raw data: [`evidence/before/workload.json`](evidence/before/workload.json), [`ev
 - **Scope of these numbers:** one laptop, Docker Desktop, test timeouts, a 60-second outage. They show the behaviour; they are not capacity numbers.
 
 **Other after-evidence:**
-- [`after/full_suite.txt`](evidence/after/full_suite.txt): 171 passed.
+- [`after/full_suite.txt`](evidence/after/full_suite.txt): 172 passed.
 - [`after/incident_tests.txt`](evidence/after/incident_tests.txt): 4 of 4 pass.
 - [`after/frontend_tests.txt`](evidence/after/frontend_tests.txt): 10 of 10 pass. That includes auto-refresh: a page left open notices the API going down within 10 s. This was added after a manual run of the demo showed a stale "Nothing to review" while the API was stopped.
 - [`after/audit.txt`](evidence/after/audit.txt): 923 published items in the whole database, 0 violations.
@@ -409,4 +411,6 @@ Keyword lists alone fail because adversaries invent new euphemisms faster than a
   - Alembic runs on psycopg;
   - there are no `models.py` files;
   - `docs/ARCHITECTURE.md` and `IMPLEMENTATION_STATUS.md` were folded into this README;
-  - the fake provider never returns 409 itself, because it scores on receipt, so 409 handling is client-tested only.
+  - the fake provider never returns 409 itself, because it scores on receipt, so 409 handling is client-tested only;
+  - `GET /media/{id}` answers `404` (not the plan's `403`) for an unknown or mismatched identity, matching the contract's "404 for anyone else";
+  - a few tests named in the plan exist under different names or weren't run: log traceability is shown with `scripts/trace_outage.sh` instead of a test, and the Redis-down test wasn't run (see §5).

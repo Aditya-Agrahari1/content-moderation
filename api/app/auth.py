@@ -1,7 +1,8 @@
 """Caller identity from X-User-Id / X-Workspace-Id.
 
 This is a test-harness identity mechanism, NOT production authentication. Checks run before
-any media lookup, so a 401/403 never reveals whether a media item exists.
+any media lookup, so a 401/403 never reveals whether a media item exists. GET /media/{id} follows
+the contract literally ("404 for anyone else") and answers 404 for an unknown or mismatched identity.
 """
 
 from dataclasses import dataclass
@@ -23,10 +24,11 @@ class Caller:
         return self.role == "admin"
 
 
-async def get_caller(
+async def lookup_caller(
     x_user_id: str | None = Header(default=None),
     x_workspace_id: str | None = Header(default=None),
-) -> Caller:
+) -> Caller | None:
+    """401 if the identity headers are missing; None if they name no member of that workspace."""
     if not x_user_id or not x_workspace_id:
         raise HTTPException(status_code=401, detail="Authentication required")
     row = await db.pool().fetchrow(
@@ -35,9 +37,13 @@ async def get_caller(
         x_user_id,
         x_workspace_id,
     )
-    if row is None:
+    return None if row is None else Caller(x_user_id, x_workspace_id, row["role"], row["verified"])
+
+
+async def get_caller(caller: Caller | None = Depends(lookup_caller)) -> Caller:
+    if caller is None:
         raise HTTPException(status_code=403, detail="Forbidden")
-    return Caller(x_user_id, x_workspace_id, row["role"], row["verified"])
+    return caller
 
 
 async def require_admin(caller: Caller = Depends(get_caller)) -> Caller:

@@ -53,6 +53,18 @@ async def test_identity_errors(api: Api):
     assert (await api.http.get(f"{API_URL}/review", headers=unknown)).status_code == 403
 
 
+async def test_get_media_is_404_for_anyone_but_the_owning_workspace(api: Api):
+    """Contract: 'Members of the owning workspace: 200; 404 for anyone else' - unknown identities included."""
+    media_id = await api.upload_ok("member_v", image(explicit=0.1))
+    assert (await api.media("member_v", media_id)).status_code == 200
+    for headers in ({"X-User-Id": "admin_u", "X-Workspace-Id": "ws_unverified"},   # other workspace
+                    {"X-User-Id": "member_v", "X-Workspace-Id": "ws_unverified"},  # mismatched identity
+                    {"X-User-Id": "mallory", "X-Workspace-Id": "ws_verified"},     # unknown user
+                    {"X-User-Id": "member_v", "X-Workspace-Id": "ws_nowhere"}):    # unknown workspace
+        response = await api.http.get(f"{API_URL}/media/{media_id}", headers=headers)
+        assert response.status_code == 404, headers
+
+
 async def test_member_cannot_review(api: Api):
     media_id = await api.upload_ok("member_v", image(minor=0.6))
     assert await decided(api, "member_v", media_id) == "held"

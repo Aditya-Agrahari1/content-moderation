@@ -132,6 +132,9 @@ def main() -> None:
     st, _ = call("GET", f"{API}/media/{held}", user="admin_u")
     check("9", "Another workspace cannot see the media", "admin_u (ws_unverified) reads a ws_verified item",
           "HTTP 404", f"HTTP {st}", st == 404)
+    st, _ = call("GET", f"{API}/media/{held}", headers={"X-User-Id": "member_v", "X-Workspace-Id": "ws_unverified"})
+    check("9b", "Unknown or mismatched identity cannot see it either",
+          "member_v claiming to be in ws_unverified reads the item", "HTTP 404", f"HTTP {st}", st == 404)
     st, _ = call("GET", f"{API}/media/{held}")
     check("10", "No identity headers", "GET /media/{id} without X-User-Id / X-Workspace-Id", "HTTP 401",
           f"HTTP {st}", st == 401)

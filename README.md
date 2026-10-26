@@ -7,12 +7,43 @@ This is a FastAPI + PostgreSQL + Redis service, with a React/TypeScript review p
 
 The repository first reproduces last Tuesday's incident with a deliberately broken handler (tag **`broken-baseline`**), and then fixes it in separate commits. Every measured number below comes from a file in [`evidence/`](evidence/). The Part 3 cost figures are estimates and are labelled as such.
 
-**In short:**
-- All five incident bugs were reproduced first. At `broken-baseline`, 4 of 4 incident tests and 8 of 10 review-page tests fail.
-- They are fixed one commit at a time. Now 171 backend tests and 10 review-page tests pass.
-- Under the same workload with a 60 s provider outage, **media published unchecked went from 126 to 0**, prohibited prompts accepted from 5 to 0, and provider calls per upload from 1.16 to 1.02 (each item scored exactly once).
-- A real `kill -9` of the workers after the provider scored publishes nothing and recovers without a second scoring.
-- To check it yourself: start the stack (below), then run `python scripts/check_all.py`. It tests each rule live and prints expected, actual, proof and PASS/FAIL.
+## Start here (5 minutes)
+
+**What this is:** I reproduced last Tuesday's incident with a deliberately broken version (git tag `broken-baseline`), then fixed it one commit at a time. Every claim below is backed by a saved run in [`evidence/`](evidence/).
+
+Run these from the repository folder. Use `python3` on macOS/Linux.
+
+**1. Start it** (about 2 minutes the first time)
+```sh
+docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build --wait
+```
+
+**2. Check every rule live** (about 1 minute)
+```sh
+python scripts/check_all.py
+```
+→ it prints each rule with *did / expected / actual / proof* and ends with `30 / 30 checks passed`.
+
+**3. Watch an outage and recovery** (optional, about 3 minutes, guided)
+```sh
+python scripts/demo.py
+```
+→ open http://localhost:3000 next to it; press Enter between steps.
+
+| Incident bug | Before (`broken-baseline`) | Now |
+|---|---|---|
+| 1. Provider timeout counted as a pass | published unchecked | held, then re-screened automatically when the provider recovers |
+| 2. Only the first 8 video frames checked | explicit last frame published | every frame checked |
+| 3. Prompt for a 16-year-old accepted | `202` | `422`, refused before anything is saved |
+| 4. Redelivered job scored again | 3 provider calls for one image | 1 call, scored once |
+| 5. Failed review request shown as "Nothing to review" | empty list | error + Retry, page re-checks every 10 s |
+| **Same workload, 60 s provider outage** | **126 published unchecked** | **0** (calls per upload 1.16 → 1.02) |
+
+Tests: 4 of 4 incident tests fail at `broken-baseline` and pass now. 171 backend and 10 review-page tests pass, including in a fresh clone.
+
+**More detail:** [the fix](#2-the-fix) · [before/after numbers](#3-before-and-after-same-workload-measured) · [crash test](#4-worker-crash-after-the-provider-scored-before-the-result-was-saved) · [limits](#5-remaining-limits-what-is-not-done-or-not-proven) · [Part 3 answers](#6-part-3-cost-and-the-next-limit) · [production plan](#7-production-plan) · [AI.md](AI.md) · [DECISIONS.md](DECISIONS.md)
+
+---
 
 ## Quick start
 
